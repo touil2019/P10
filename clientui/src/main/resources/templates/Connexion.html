@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="htpp://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <link
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+            crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous" />
+    <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+            integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
+            crossorigin="anonymous"></script>
+    <script
+            src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+    <title>Connexion</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <div class="card">
+                <article class="card-body">
+                    <h4 class="card-title text-center mb-4 mt-1">Connexion</h4>
+                    <hr />
+                    <form th:action="@{/connexion}" method="post">
+                        <div class="d-flex justify-content-center" >
+                            <div class="form-group">
+                                <label for="username">Username</label> <input class="form-control" type="text"
+                                                                              id="username" name="username" placeholder="username"
+                                                                              required="required" autofocus="autofocus" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</label> <input class="form-control" type="password"
+                                                                              id="password" name="password" placeholder="password"
+                                                                              required="required" />
+                            </div>
+                        </div>
+                        <hr />
+
+                        <div class="d-flex justify-content-center ">
+                            <button type="submit" class="btn btn-primary btn-block"> Se Connecter</button>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-center links">
+                                <a href="/utilisateur/creer">Créer un compte</a>
+                            </div>
+                        </div>
+                        <input type="hidden" name="${_csrf.parameterName}"
+                               value="${_csrf.token}" />
+                    </form>
+                </article>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

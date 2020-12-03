@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="htpp://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+    <link
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous" />
+    <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+            integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+
+</head>
+
+<body>
+
+<header>
+    <ul class="navbar navbar-expand-md navbar-dark bg-primary sticky-top">
+        <div class="brand_logo_container">
+            <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQbTSEgIlBjydMFzhjDAxyBxrCkZ_AB9rJ9uTv7uf06Sw&usqp=CAU&ec=45687376"
+                    class="brand_logo" alt="Logo">
+        </div>
+
+
+        <nav class="nav navbar-nav">
+            <ul class="navbar-nav m-auto">
+                <li  class="nav-item active"><a class="btn btn-primary" th:href="@{/}">Accueil</a></li>
+                <li class="nav-item"><a class="btn btn-primary" th:if="${#request.userPrincipal != null}" th:href="@{/Monprofile}">Mon Compte</a></li>
+                <li class="nav-item"><a class="btn btn-primary" th:if="${#request.userPrincipal == null}" th:href="@{/connexion}">Connexion</a></li>
+                <li class="nav-item"><a class="btn btn-primary" th:href="@{/logout}" th:if="${#request.userPrincipal != null}" >Déconnexion</a></li>
+               <li class="nav-item ml-6">
+                   <form th:action="@{/}">
+
+                       <input type="text" name="mc" placeholder="Rechercher..."/>
+                       <button class="btn btn-light">Chercher</button>
+                   </form>
+               </li>
+
+            </ul>
+
+        </nav>
+    </ul>
+    </div>
+</header>
+<hr />
+<section layout:fragment="content"></section>
+
+<footer th:class="navbar-fixed-bottom">
+    <hr />
+    <hr />
+    <div class="containe">
+        <small> Copyright 2020 </small>
+    </div>
+</footer>
+</body>
+</html>

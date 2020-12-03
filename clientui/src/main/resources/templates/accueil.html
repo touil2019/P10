@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="htpp://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <link
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+            crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous" />
+    <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+            integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
+            crossorigin="anonymous"></script>
+    <script
+            src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+    <title>Accueil</title>
+</head>
+<body>
+
+<body layout:fragment="content">
+
+
+<div class="container">
+
+    <div class=" container ">
+        <div class="">
+            <div class="row" >
+                <div class="card col-sm-4 " th:each="livre : ${livres}" >
+                    <a class="text-center" th:href="@{/details-livre/{id} (id=${livre.id})}">
+                        <img  th:src="${livre.image}"   class="card-img-top" width="200" height="350">
+                    </a>
+                    <div class="card-body">
+                        <label>Titre:</label><label th:text= "${livre.titre}"></label>
+                        <label>Nom de l auteur:</label><label th:text= "${livre.auteurName}"></label>
+                        <label>Prenom de l auteur:</label><label th:text= "${livre.auteurPrenom}"></label>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="spacer" th:if="${livres.size()==0}">
+        <br/>
+        <h2>Aucun résultat ne correspond à votre recherche</h2>
+    </div>
+</div>
+</body>
+</body>
+</html>
