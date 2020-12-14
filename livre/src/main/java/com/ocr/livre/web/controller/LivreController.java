@@ -4,6 +4,8 @@ package com.ocr.livre.web.controller;
 import com.ocr.livre.dao.LivreDao;
 import com.ocr.livre.model.Livre;
 import com.ocr.livre.service.LivreService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +17,16 @@ import java.util.List;
 @RestController
 public class LivreController {
 
+    private static final Logger logger = LogManager.getLogger(LivreController.class);
+
     @Autowired
     private LivreDao livreDao;
 
 
     @Autowired
     LivreService livreService ;
+
+
 
 
     /**

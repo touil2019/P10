@@ -52,6 +52,8 @@ public class Livre {
     @JsonIgnore
     @OneToMany(mappedBy = "livre", fetch = FetchType.EAGER)
     private Set<Emprunt> emprunt;
+    @OneToMany(mappedBy = "livre", fetch = FetchType.EAGER )
+    private Set<Reservation> reservations;
 
 
     public Livre() {
@@ -158,5 +160,12 @@ public class Livre {
     }
 
 
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
+    }
 }
 

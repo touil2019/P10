@@ -4,9 +4,11 @@ import com.ocr.livre.configuration.CustomErrorDecoder;
 import com.ocr.livre.dao.EmailDao;
 import com.ocr.livre.dao.LivreDao;
 import com.ocr.livre.dao.EmpruntLivreDao;
+import com.ocr.livre.dao.ReservationDao;
 import com.ocr.livre.model.Email;
 import com.ocr.livre.model.Emprunt;
 import com.ocr.livre.model.Livre;
+import com.ocr.livre.model.Reservation;
 import com.ocr.livre.service.Implement.EmpruntServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -35,6 +37,8 @@ private EmpruntLivreDao empruntLivreDao;
 private EmailDao emailDao;
 @Autowired
 private EmpruntServiceImpl empruntService;
+@Autowired
+private ReservationDao reservationDao;
 
 	public static void main(String[] args) {
 		SpringApplication.run(LivreApplication.class, args);
@@ -104,6 +108,12 @@ private EmpruntServiceImpl empruntService;
 
 		emailDao.save(email);
 
+		Reservation reservation1 = new Reservation( livre2,"user",new GregorianCalendar(2020,12,02).getTime(), new GregorianCalendar(2021,01,02).getTime(),new GregorianCalendar( 2020,11,30).getTime(),1, false);
+		reservationDao.save(reservation1);
+		Reservation reservation2 = new Reservation(livre4,"user",new GregorianCalendar(2020,12,02).getTime(), new GregorianCalendar(2021,01,02).getTime(),new GregorianCalendar( 2020,11,30).getTime(),1, false);
+		reservationDao.save(reservation2);
+		Reservation reservation3 = new Reservation(livre8,"admin",new GregorianCalendar(2020,12,02).getTime(), new GregorianCalendar(2021,01,02).getTime(),new GregorianCalendar( 2020,11,30).getTime(),2, false);
+		reservationDao.save(reservation3);
 
 	}
 }
