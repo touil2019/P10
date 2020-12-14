@@ -1,9 +1,6 @@
 package com.ocr.livre.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,7 +12,7 @@ public class Reservation implements Serializable {
 
     private Long id;
 
-    private Long idUtilisateur;
+    private String pseudoEmprunteur;
 
     private Date dateReservation;
 
@@ -27,12 +24,18 @@ public class Reservation implements Serializable {
 
     private boolean enCours;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_livre")
+    private Livre livre;
+
     public Reservation() {
+        super();
     }
 
-    public Reservation(Long id, Long idUtilisateur, Date dateReservation, Date dateDeRetour, Date dateNotification, Integer position, boolean enCours) {
-        this.id = id;
-        this.idUtilisateur = idUtilisateur;
+    public Reservation( Livre livre ,String pseudoEmprunteur, Date dateReservation, Date dateDeRetour, Date dateNotification, Integer position, boolean enCours) {
+
+        this.livre = livre;
+        this.pseudoEmprunteur = pseudoEmprunteur;
         this.dateReservation = dateReservation;
         this.dateDeRetour = dateDeRetour;
         this.dateNotification = dateNotification;
@@ -48,12 +51,12 @@ public class Reservation implements Serializable {
         this.id = id;
     }
 
-    public Long getIdUtilisateur() {
-        return idUtilisateur;
+    public String getPseudoEmprunteur() {
+        return pseudoEmprunteur;
     }
 
-    public void setIdUtilisateur(Long idUtilisateur) {
-        this.idUtilisateur = idUtilisateur;
+    public void setPseudoEmprunteur(String pseudoEmprunteur) {
+        this.pseudoEmprunteur = pseudoEmprunteur;
     }
 
     public Date getDateReservation() {
@@ -96,11 +99,19 @@ public class Reservation implements Serializable {
         this.enCours = enCours;
     }
 
+    public Livre getLivre() {
+        return livre;
+    }
+
+    public void setLivre(Livre livre) {
+        this.livre = livre;
+    }
+
     @Override
     public String toString() {
         return "Reservation{" +
                 "id=" + id +
-                ", idUtilisateur=" + idUtilisateur +
+                ", pseudoEmprunteur='" + pseudoEmprunteur + '\'' +
                 ", dateReservation=" + dateReservation +
                 ", dateDeRetour=" + dateDeRetour +
                 ", dateNotification=" + dateNotification +

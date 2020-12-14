@@ -20,7 +20,7 @@ import java.util.Optional;
 @RestController
 public class EmpruntController {
 
-    private static final Logger logger = LogManager.getLogger(LivreApplication.class);
+    private static final Logger logger = LogManager.getLogger(EmpruntController.class);
 
     @Autowired
     EmpruntService empruntService ;

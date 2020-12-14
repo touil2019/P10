@@ -1,4 +1,19 @@
 package com.ocr.livre.dao;
 
-public interface ReservationDao {
+import com.ocr.livre.model.Reservation;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface ReservationDao extends JpaRepository<Reservation, Long> {
+
+    Optional<Reservation> findById (Long IdReservation);
+
+    List<Reservation> findAllByPseudoEmprunteurAndEnCoursIsTrue(String pseudoEmprunteur);
+
+
+   // List<Reservation>findReservationByLivre();
+
+    void deleteById(Long Id);
 }

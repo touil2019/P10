@@ -16,7 +16,8 @@ import java.util.List;
 
     @EnableScheduling
     @Service
-    public class LivreServiceImpl implements LivreService {
+    public class
+    LivreServiceImpl implements LivreService {
 
         private static final Logger logger = (Logger) LogManager.getLogger(LivreApplication.class);
 
