@@ -2,6 +2,7 @@ package com.clientui.controller;
 
 import com.clientui.beans.EmpruntBean;
 import com.clientui.beans.LivreBean;
+import com.clientui.beans.ReservationBean;
 import com.clientui.beans.UtilisateurBean;
 import com.clientui.proxies.MicroserviceLivreProxy;
 import feign.Param;
@@ -21,27 +22,26 @@ public class ClientController {
     private MicroserviceLivreProxy livreProxy;
 
     @GetMapping("/")
-    public String accueil(Model model,@RequestParam(name = "mc",defaultValue = "")String mc){
+    public String accueil(Model model, @RequestParam(name = "mc", defaultValue = "") String mc) {
 
-        List<LivreBean>livres = livreProxy.listeLivreRecherche(mc);
+        List<LivreBean> livres = livreProxy.listeLivreRecherche(mc);
         model.addAttribute("livres", livres);
-        model.addAttribute("mc",mc);
+        model.addAttribute("mc", mc);
 
 
         return "accueil";
     }
 
-   @RequestMapping("/details-livre/{id}")
-    public String ficheLivre(@PathVariable Long id, Model model){
+    @RequestMapping("/details-livre/{id}")
+    public String ficheLivre(@PathVariable Long id, Model model) {
 
 
         LivreBean livre = livreProxy.recupererUnLivre(id);
 
         model.addAttribute("livre", livre);
 
-       return "fiche-livre";
+        return "fiche-livre";
     }
-
 
 
     @RequestMapping(value = "/MonProfile", method = RequestMethod.GET)
@@ -50,31 +50,46 @@ public class ClientController {
         UtilisateurBean utilisateur = (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("utilisateur", utilisateur);
 
-        List<EmpruntBean> listEmprunt= livreProxy.listeDEmpruntParUtilisateur(utilisateur.getUsername());
-        model.addAttribute("listEmprunt",listEmprunt);
+        List<EmpruntBean> listEmprunt = livreProxy.listeDEmpruntParUtilisateur(utilisateur.getUsername());
+        model.addAttribute("listEmprunt", listEmprunt);
 
-        model.addAttribute("livres",listEmprunt);
+        List<ReservationBean> listeReservation = livreProxy.listeReservationUtilisateur(utilisateur.getUsername());
+        model.addAttribute("listeReservation", listeReservation);
+
+        model.addAttribute("livres", listEmprunt);
 
         return "/MonProfile";
 
     }
 
     @GetMapping(value = "/emprunt/prolongerEmprunt/{id}")
-    public String prolongerEmprunt(@PathVariable("id")Long idEmprunt,Model model) {
+    public String prolongerEmprunt(@PathVariable("id") Long idEmprunt, Model model) {
 
         System.out.println("Appel Emprunt méthode prolongerEmprunt");
 
-            UtilisateurBean utilisateur = (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UtilisateurBean utilisateur = (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-            livreProxy.prolongerEmprunt(idEmprunt);
+        livreProxy.prolongerEmprunt(idEmprunt);
 
-            List<EmpruntBean> listEmprunt= livreProxy.listeDEmpruntParUtilisateur(utilisateur.getUsername());
-            model.addAttribute("listEmprunt",listEmprunt);
-
-
-            return "redirect:/MonProfile";
-        }
+        List<EmpruntBean> listEmprunt = livreProxy.listeDEmpruntParUtilisateur(utilisateur.getUsername());
+        model.addAttribute("listEmprunt", listEmprunt);
 
 
+        return "redirect:/MonProfile";
+    }
 
+
+
+    @GetMapping(value = "/reservation/pseudo/{pseudoEmprunteur}/delete")
+    public String deleteById(@PathVariable("Id") Long Id, Model model) {
+
+
+        UtilisateurBean utilisateur = (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        List<ReservationBean> listeResevation = livreProxy.deleteById(Id.longValue());
+        model.addAttribute("listeReservation", listeResevation);
+
+        return "redirect/MonProfile";
+    }
 }
+

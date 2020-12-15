@@ -23,13 +23,13 @@ public class ReservationBean {
         private LivreBean livre ;
 
 
-
         public ReservationBean() {
             super();
         }
 
 
-        public Long getId() {
+
+    public Long getId() {
             return id;
         }
 

@@ -45,6 +45,25 @@
 
             </div>
 
+            <div class="container">
+
+                    <div class=" card cl-4" th:each="reservation:${listeReservation}">
+                        <label>Date de réservation</label><label th:text="${#dates.format(reservation.dateReservation, 'dd-MM-yyyy')}"></label><br/>
+                        <label>Date de retour</label><label th:text="${#dates.format(reservation.dateDeRetour, 'dd-MM-yyyy')}"></label><br/>
+                        <label>Date de notification</label><label th:text="${#dates.format(reservation.dateNotification, 'dd-MM-yyyy')}"></label><br/>
+                        <label>Position</label><label th:text="${reservation.position}"></label><br/>
+                        <label>Livre</label><label th:text="${reservation.livre.titre}"></label><br/>
+
+
+                        <a class="btn btn-primary" style="width:130px"
+
+                          >Supprimer</a>
+                    </div>
+
+
+
+            </div>
+
 </div>
 
     </div>
