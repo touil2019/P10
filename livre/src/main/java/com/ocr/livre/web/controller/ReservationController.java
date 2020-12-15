@@ -28,6 +28,7 @@ public class ReservationController {
         logger.debug("Appel controlleur ListeReservationByPseudoEmprunteur");
         return reservationService.findReservationByPseudoEmprunteur(pseudoEmprunteur);
     }
+
     @GetMapping(value="/reservation/pseudo/{pseudoEmprunteur}/delete")
     public void deleteById(@PathVariable("Id") Long Id){
         reservationService.deleteById(Id);

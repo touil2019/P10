@@ -52,6 +52,7 @@ public class Livre {
     @JsonIgnore
     @OneToMany(mappedBy = "livre", fetch = FetchType.EAGER)
     private Set<Emprunt> emprunt;
+    @JsonIgnore
     @OneToMany(mappedBy = "livre", fetch = FetchType.EAGER )
     private Set<Reservation> reservations;
 

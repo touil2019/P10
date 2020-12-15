@@ -75,14 +75,14 @@ MicroserviceLivreProxy {
      * @param pseudoEmprunteur
      * @return
      */
-    @GetMapping(value = "/reservation/pseudo/{pseudoEmprunteur}")
+    @GetMapping(value = "/microservicelivre/reservation/pseudo/{pseudoEmprunteur}")
     List<ReservationBean> listeReservationUtilisateur(@PathVariable("pseudoEmprunteur") String pseudoEmprunteur);
 
     /**
      *
      * @param Id
      */
-    @GetMapping(value="/reservation/pseudo/{pseudoEmprunteur}/delete")
-    public void deleteById(@PathVariable("Id") Long Id);
+    @GetMapping(value="/microservicelivre/reservation/pseudo/{pseudoEmprunteur}/delete")
+    List<ReservationBean>deleteById(@PathVariable("Id") Long Id);
 
 }

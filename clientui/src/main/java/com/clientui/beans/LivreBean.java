@@ -48,27 +48,6 @@ public class LivreBean {
     public LivreBean() {
     }
 
-    /**
-     *Instanciation du livre
-     * @param auteurName
-     * @param auteurPrenom
-     * @param titre
-     * @param edition
-     * @param image
-     * @param quantiteDispo
-     * @param emprunt
-     */
-    public LivreBean(String auteurName, String auteurPrenom, String titre, String edition, String image, int quantiteDispo, EmpruntBean emprunt) {
-
-        this.auteurName = auteurName;
-        this.auteurPrenom = auteurPrenom;
-        this.titre = titre;
-        this.edition = edition;
-        this.quantiteDispo = quantiteDispo;
-        this.image = image;
-        this.emprunt = (Set<EmpruntBean>) emprunt;
-
-    }
 
     public long getId() {
         return id;
@@ -132,6 +111,7 @@ public class LivreBean {
         this.quantiteDispo = quantiteDispo;
     }
 
+
     public boolean isPresent() {
         return Present;
     }
@@ -144,7 +124,6 @@ public class LivreBean {
         this.emprunt = emprunt;
     }
 
-
     @Override
     public String toString() {
         return "LivreBean{" +
@@ -156,8 +135,7 @@ public class LivreBean {
                 ", image='" + image + '\'' +
                 ", quantiteDispo=" + quantiteDispo +
                 ", Present=" + Present +
-                ", emprunt=" + emprunt +
-                '}';
+                ", emprunt=" + emprunt + '}';
     }
 }
 
