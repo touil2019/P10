@@ -108,11 +108,11 @@ private ReservationDao reservationDao;
 
 		emailDao.save(email);
 
-		Reservation reservation1 = new Reservation( livre2,"user",new GregorianCalendar(2020,12,02).getTime(), new GregorianCalendar(2021,01,02).getTime(),new GregorianCalendar( 2020,11,30).getTime(),1, false);
+		Reservation reservation1 = new Reservation( livre2,"user",new GregorianCalendar(2020,12,02).getTime(), new GregorianCalendar(2021,01,02).getTime(),null,1, false);
 		reservationDao.save(reservation1);
-		Reservation reservation2 = new Reservation(livre4,"user",new GregorianCalendar(2020,12,02).getTime(), new GregorianCalendar(2021,01,02).getTime(),new GregorianCalendar( 2020,11,30).getTime(),1, false);
+		Reservation reservation2 = new Reservation(livre4,"user",new GregorianCalendar(2020,12,02).getTime(), new GregorianCalendar(2021,01,02).getTime(),null,1, false);
 		reservationDao.save(reservation2);
-		Reservation reservation3 = new Reservation(livre8,"admin",new GregorianCalendar(2020,12,02).getTime(), new GregorianCalendar(2021,01,02).getTime(),new GregorianCalendar( 2020,11,30).getTime(),2, false);
+		Reservation reservation3 = new Reservation(livre8,"admin",new GregorianCalendar(2020,12,02).getTime(), new GregorianCalendar(2021,01,02).getTime(),null,2, false);
 		reservationDao.save(reservation3);
 
 	}

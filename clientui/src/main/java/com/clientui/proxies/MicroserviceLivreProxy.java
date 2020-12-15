@@ -3,6 +3,7 @@ package com.clientui.proxies;
 
 import com.clientui.beans.EmpruntBean;
 import com.clientui.beans.LivreBean;
+import com.clientui.beans.ReservationBean;
 import com.clientui.configuration.FeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,8 @@ import java.util.Optional;
  * Api Livre
  */
 @Component
-public interface MicroserviceLivreProxy {
+public interface
+MicroserviceLivreProxy {
     /**
      *
      * liste de livres
@@ -68,5 +70,19 @@ public interface MicroserviceLivreProxy {
     @PutMapping("/microservicelivre/emprunt/{id}/prolonger")
     void prolongerEmprunt(@PathVariable ("id") Long idEmprunt);
 
+    /**
+     *
+     * @param pseudoEmprunteur
+     * @return
+     */
+    @GetMapping(value = "/reservation/pseudo/{pseudoEmprunteur}")
+    List<ReservationBean> listeReservationUtilisateur(@PathVariable("pseudoEmprunteur") String pseudoEmprunteur);
+
+    /**
+     *
+     * @param Id
+     */
+    @GetMapping(value="/reservation/pseudo/{pseudoEmprunteur}/delete")
+    public void deleteById(@PathVariable("Id") Long Id);
 
 }
