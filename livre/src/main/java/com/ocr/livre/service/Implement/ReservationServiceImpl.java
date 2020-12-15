@@ -47,5 +47,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public void deleteById(Long Id) {
 
+        reservationDao.deleteById(Id);
+
     }
 }
