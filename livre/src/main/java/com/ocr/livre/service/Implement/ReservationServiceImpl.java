@@ -50,4 +50,18 @@ public class ReservationServiceImpl implements ReservationService {
         reservationDao.deleteById(Id);
 
     }
+   @Override
+    public void annulerReservation(Long id, String pseudoEmprunteur){
+
+        Optional<Reservation> r=reservationDao.findById(id);
+        Reservation reservation = null;
+        if (r.isPresent()){
+            reservation= r.get();
+            if ( reservation.getPseudoEmprunteur().equals(pseudoEmprunteur)){
+                reservation.setEnCours(false);
+                reservationDao.save(reservation);
+            }
+        }
+   }
+
 }

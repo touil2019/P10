@@ -80,16 +80,22 @@ public class ClientController {
 
 
 
-    @GetMapping(value = "/reservation/pseudo/{pseudoEmprunteur}/delete")
-    public String deleteById(@PathVariable("Id") Long Id, Model model) {
+    @GetMapping(value = "/reservation/{id}/annuler")
+    public String annulerReservation(@PathVariable("id") Long id, Model model) {
 
 
         UtilisateurBean utilisateur = (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        livreProxy.annulerReservation(id, utilisateur.getUsername());
 
-        List<ReservationBean> listeResevation = livreProxy.deleteById(Id.longValue());
-        model.addAttribute("listeReservation", listeResevation);
+        List<EmpruntBean> listEmprunt = livreProxy.listeDEmpruntParUtilisateur(utilisateur.getUsername());
+        model.addAttribute("listEmprunt", listEmprunt);
 
-        return "redirect/MonProfile";
+        List<ReservationBean> listeReservation = livreProxy.listeReservationUtilisateur(utilisateur.getUsername());
+        model.addAttribute("listeReservation", listeReservation);
+
+        model.addAttribute("livres", listEmprunt);
+
+        return "redirect:/MonProfile";
     }
 }
 

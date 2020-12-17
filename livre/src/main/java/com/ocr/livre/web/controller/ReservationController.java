@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.Id;
 import java.util.List;
 
 @RestController
@@ -30,8 +31,14 @@ public class ReservationController {
     }
 
     @GetMapping(value="/reservation/pseudo/{pseudoEmprunteur}/delete")
-    public void deleteById(@PathVariable("Id") Long Id){
-        reservationService.deleteById(Id);
+    public void deleteById(@PathVariable("id") Long id){
+        reservationService.deleteById(id);
+    }
+
+    @GetMapping(value="/reservation/{id}/pseudo/{pseudoEmprunteur}/annuler")
+    public void annulerReservation(@PathVariable("id") Long id,@PathVariable("pseudoEmprunteur") String pseudoEmprunteur){
+
+        reservationService.annulerReservation( id,pseudoEmprunteur);
     }
 
 }

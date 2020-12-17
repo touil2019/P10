@@ -48,21 +48,35 @@
             <div class="container">
 
                     <div class=" card cl-4" th:each="reservation:${listeReservation}">
-                        <label>Date de réservation</label><label th:text="${#dates.format(reservation.dateReservation, 'dd-MM-yyyy')}"></label><br/>
-                        <label>Date de retour</label><label th:text="${#dates.format(reservation.dateDeRetour, 'dd-MM-yyyy')}"></label><br/>
-                        <label>Date de notification</label><label th:text="${#dates.format(reservation.dateNotification, 'dd-MM-yyyy')}"></label><br/>
-                        <label>Position</label><label th:text="${reservation.position}"></label><br/>
-                        <label>Livre</label><label th:text="${reservation.livre.titre}"></label><br/>
+                        <label>Date de réservation</label><label th:text="${#dates.format(reservation.dateReservation, 'dd-MM-yyyy')}"></label>
+                        <label>Date de retour</label><label th:text="${#dates.format(reservation.dateDeRetour, 'dd-MM-yyyy')}"></label>
+                        <label>Date de notification</label><label th:text="${#dates.format(reservation.dateNotification, 'dd-MM-yyyy')}"></label>
+                        <label>Position</label><label th:text="${reservation.position}"></label>
+                        <label>Livre</label><label th:text="${reservation.livre.titre}"></label>
 
 
-                        <a class="btn btn-primary" style="width:130px"
+                        <a class="btn btn-primary" style="width:130px" th:href="@{/reservation/{id}/annuler(id=${reservation.id})}">Annuler</a>
 
-                          >Annuler</a>
                     </div>
-
-
-
             </div>
+        <!--    <div class="col-md-6">
+                <div class="panel panel primary" th:each="reservation:${listeReservation}">
+                    <div class="panel-heading">Réservation</div>
+                    <div class="panel-body">
+                        <label>Date de réservation</label>
+                        <label th:text="${#dates.format(reservation.dateReservation, 'dd-MM-yyyy')}"></label>
+                        <label>Date de retour</label>
+                        <label th:text="${#dates.format(reservation.dateDeRetour, 'dd-MM-yyyy')}"></label>
+                        <label>Date de notification</label>
+                        <label th:text="${#dates.format(reservation.dateNotification, 'dd-MM-yyyy')}"></label>
+                        <label>Position</label>
+                        <label th:text="${reservation.position}"></label>
+                        <label>Livre</label>
+                        <label th:text="${reservation.livre.titre}"></label>
+                    </div>
+                </div>
+
+            </div>-->
 
 </div>
 

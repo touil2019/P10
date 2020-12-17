@@ -15,7 +15,8 @@ public interface ReservationService {
 
     List<Reservation>findReservationByLivre();
 
-    void deleteById(Long Id);
+    void deleteById(Long id);
 
+    void annulerReservation(Long id, String pseudoEmprunteur);
 
 }
