@@ -40,7 +40,7 @@
                 <label>dateFin:</label><label th:text="${ #dates.format(emprunt.dateFin, 'dd-MM-yyyy')}"></label><br/>
 
                 <a class="btn btn-primary" style="width:130px"
-                   th:if="${emprunt.prolongeable == true && emprunt.dateDeRetour !> emprunt.(new date)}"
+                   th:if="${emprunt.prolongeable == true }"
                    th:href="@{/emprunt/prolongerEmprunt/{id}(id=${emprunt.idEmprunt})}" >Prolonger</a>
 
             </div>
