@@ -87,10 +87,11 @@ public class EmpruntServiceImpl implements EmpruntService {
 
         logger.debug("Appel empruntService méthode prolongerEmprunt avec paramètre idEmprunt : " + idEmprunt);
 
+
         Emprunt emprunt = empruntLivreDao.findById(idEmprunt).get();
 
 
-        if (emprunt.isProlongeable() == true && emprunt.isCloturer()== false) {
+        if (emprunt.isProlongeable() == true && emprunt.isCloturer()== false && emprunt.getDateFin().after(new Date())) {
             emprunt.setDateFin(ajouter4Semaines( emprunt.getDateFin()));
             emprunt.setProlongeable(false);
             empruntLivreDao.save(emprunt);
