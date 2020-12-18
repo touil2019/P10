@@ -62,8 +62,8 @@ public class ClientController {
 
     }
 
-    @GetMapping(value = "/emprunt/prolongerEmprunt/{id}")
-    public String prolongerEmprunt(@PathVariable("id") Long idEmprunt, Model model) {
+    @GetMapping(value = "/emprunt/{id}/prolonger")
+    public String prolongerEmprunt(@PathVariable("id") Long idEmprunt) {
 
         System.out.println("Appel Emprunt méthode prolongerEmprunt");
 
@@ -71,8 +71,8 @@ public class ClientController {
 
         livreProxy.prolongerEmprunt(idEmprunt);
 
-        List<EmpruntBean> listEmprunt = livreProxy.listeDEmpruntParUtilisateur(utilisateur.getUsername());
-        model.addAttribute("listEmprunt", listEmprunt);
+       // List<EmpruntBean> listEmprunt = livreProxy.listeDEmpruntParUtilisateur(utilisateur.getUsername());
+      //  model.addAttribute("listEmprunt", listEmprunt);
 
 
         return "redirect:/MonProfile";

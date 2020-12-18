@@ -1,6 +1,7 @@
 package com.ocr.livre.service;
 
 import com.ocr.livre.model.Emprunt;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
 import java.util.List;
@@ -20,7 +21,7 @@ public interface EmpruntService {
 
     Date ajouter4Semaines(Date date);
 
-    Emprunt prolongerEmprunt(Long idEmprunt);
+    ResponseEntity<Emprunt> prolongerEmprunt(Long idEmprunt);
 
     List<Emprunt> listeLivreNonRendueApresDateFin();
 }

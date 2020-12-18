@@ -41,7 +41,7 @@
 
                 <a class="btn btn-primary" style="width:130px"
                    th:if="${emprunt.prolongeable == true }"
-                   th:href="@{/emprunt/prolongerEmprunt/{id}(id=${emprunt.idEmprunt})}" >Prolonger</a>
+                   th:href="@{/emprunt/{id}/prolonger(id=${emprunt.idEmprunt})}" >Prolonger</a>
 
             </div>
 
