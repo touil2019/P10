@@ -60,12 +60,7 @@ public class EmpruntController {
 
         return empruntService.prolongerEmprunt(idEmprunt);
 
-      /** if (emprunt != null){
-            return ResponseEntity.ok(emprunt);
-        }
-        return new ResponseEntity(
-                "Ne peut pas être prolongé",
-                HttpStatus.BAD_REQUEST);*/
+
     }
 
     /**

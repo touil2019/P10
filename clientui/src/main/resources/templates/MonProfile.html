@@ -8,7 +8,7 @@
             rel="stylesheet"
             integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
             crossorigin="anonymous" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{../style.css}" />
     <link
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
             rel="stylesheet"
@@ -28,57 +28,56 @@
 <body>
 <div layout:fragment="content" th:if="${#request.userPrincipal != null}">
     <div  class="container" >
-        <div class="row">
-            <div class="card col-4" th:each="emprunt:${listEmprunt}">
 
-                <img  th:src="${emprunt.livre.image}" class="card-img-top" width="180" height="350">
+        <div class="card">
+            <div class="card-header">Emprunt</div>
+            <div class="card-body row" >
 
-                <label>Livre:</label><label th:text="${emprunt.livre.titre}"></label><br/>
+                <div class="card" th:each="emprunt:${listEmprunt}">
 
-                <label>dateDebut:</label><label th:text="${#dates.format(emprunt.dateDebut, 'dd-MM-yyyy')}"></label><br/>
+                    <img  th:src="${emprunt.livre.image}" class="card-img-top" width="150px" height="210px">
 
-                <label>dateFin:</label><label th:text="${ #dates.format(emprunt.dateFin, 'dd-MM-yyyy')}"></label><br/>
+                    <label>Livre:</label><label th:text="${emprunt.livre.titre}"></label>
 
-                <a class="btn btn-primary" style="width:130px"
-                   th:if="${emprunt.prolongeable == true }"
-                   th:href="@{/emprunt/{id}/prolonger(id=${emprunt.idEmprunt})}" >Prolonger</a>
+                    <label>dateDebut:</label><label th:text="${#dates.format(emprunt.dateDebut, 'dd-MM-yyyy')}"></label>
+
+                    <label>dateFin:</label><label th:text="${ #dates.format(emprunt.dateFin, 'dd-MM-yyyy')}"></label>
+
+                    <a class="btn btn-primary" style="width:130px"
+                       th:if="${emprunt.prolongeable == true }"
+                       th:href="@{/emprunt/{id}/prolonger(id=${emprunt.idEmprunt})}" >Prolonger</a>
+
+                </div>
 
             </div>
+
+        </div>
+
+
+        <div class="row">
+
 
             <div class="container">
 
                     <div class=" card cl-4" th:each="reservation:${listeReservation}">
-                        <label>Date de réservation</label><label th:text="${#dates.format(reservation.dateReservation, 'dd-MM-yyyy')}"></label>
-                        <label>Date de retour</label><label th:text="${#dates.format(reservation.dateDeRetour, 'dd-MM-yyyy')}"></label>
-                        <label>Date de notification</label><label th:text="${#dates.format(reservation.dateNotification, 'dd-MM-yyyy')}"></label>
-                        <label>Position</label><label th:text="${reservation.position}"></label>
-                        <label>Livre</label><label th:text="${reservation.livre.titre}"></label>
 
+                        <img class="card-img-top" src="${emprunt.livre.image}" alt="Card image cap">
 
-                        <a class="btn btn-primary" style="width:130px" th:href="@{/reservation/{id}/annuler(id=${reservation.id})}">Annuler</a>
+                        <h5 class="card-title">Card title</h5>
+
+                        <label>Date de réservation</label><label th:text="${#dates.format(reservation.dateReservation, 'dd-MM-yyyy')}"></label><br/>
+                        <label>Date de retour</label><label th:text="${#dates.format(reservation.dateDeRetour, 'dd-MM-yyyy')}"></label><br/>
+                        <label>Date de notification</label><label th:text="${#dates.format(reservation.dateNotification, 'dd-MM-yyyy')}"></label><br/>
+                        <label>Position</label><label th:text="${reservation.position}"></label><br/>
+                        <label>Livre</label><label th:text="${reservation.livre.titre}"></label><br/>
+
+                        <a class="btn btn-primary" style="width:130px" >Réserver</a><br/>
+                        <a class="btn btn-primary" style="width:130px" th:href="@{/reservation/{id}/annuler(id=${reservation.id})}">Annuler</a><br/>
 
                     </div>
             </div>
-        <!--    <div class="col-md-6">
-                <div class="panel panel primary" th:each="reservation:${listeReservation}">
-                    <div class="panel-heading">Réservation</div>
-                    <div class="panel-body">
-                        <label>Date de réservation</label>
-                        <label th:text="${#dates.format(reservation.dateReservation, 'dd-MM-yyyy')}"></label>
-                        <label>Date de retour</label>
-                        <label th:text="${#dates.format(reservation.dateDeRetour, 'dd-MM-yyyy')}"></label>
-                        <label>Date de notification</label>
-                        <label th:text="${#dates.format(reservation.dateNotification, 'dd-MM-yyyy')}"></label>
-                        <label>Position</label>
-                        <label th:text="${reservation.position}"></label>
-                        <label>Livre</label>
-                        <label th:text="${reservation.livre.titre}"></label>
-                    </div>
-                </div>
 
-            </div>-->
-
-</div>
+        </div>
 
     </div>
 </div>
