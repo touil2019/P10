@@ -1,5 +1,7 @@
 package com.clientui.beans;
 
+import java.util.Set;
+
 /**
  * Bean pour l entite Livre
  */
@@ -40,7 +42,7 @@ public class LivreBean {
     /**
      * relation avec la table
      */
-    private EmpruntBean emprunt;
+    private Set<EmpruntBean> emprunt;
 
 
     public LivreBean() {
@@ -64,7 +66,7 @@ public class LivreBean {
         this.edition = edition;
         this.quantiteDispo = quantiteDispo;
         this.image = image;
-        this.emprunt = emprunt;
+        this.emprunt = (Set<EmpruntBean>) emprunt;
 
     }
 
@@ -130,30 +132,32 @@ public class LivreBean {
         this.quantiteDispo = quantiteDispo;
     }
 
+    public boolean isPresent() {
+        return Present;
+    }
+
+    public Set<EmpruntBean> getEmprunt() {
+        return emprunt;
+    }
+
+    public void setEmprunt(Set<EmpruntBean> emprunt) {
+        this.emprunt = emprunt;
+    }
+
+
     @Override
     public String toString() {
-        return "Livre{" +
+        return "LivreBean{" +
                 "id=" + id +
                 ", auteurName='" + auteurName + '\'' +
                 ", auteurPrenom='" + auteurPrenom + '\'' +
                 ", titre='" + titre + '\'' +
                 ", edition='" + edition + '\'' +
                 ", image='" + image + '\'' +
-                ", quantiteDispo='" + quantiteDispo + '\'' +
-                ", emprunt='" + emprunt + '\'' +
+                ", quantiteDispo=" + quantiteDispo +
+                ", Present=" + Present +
+                ", emprunt=" + emprunt +
                 '}';
-    }
-
-    public boolean isPresent() {
-        return Present;
-    }
-
-    public EmpruntBean getEmprunt() {
-        return emprunt;
-    }
-
-    public void setEmprunt(EmpruntBean emprunt) {
-        this.emprunt = emprunt;
     }
 }
 

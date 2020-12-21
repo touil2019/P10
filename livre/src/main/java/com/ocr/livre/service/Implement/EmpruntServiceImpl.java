@@ -9,6 +9,8 @@ import com.ocr.livre.service.EmpruntService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +24,7 @@ import java.util.Optional;
 @Service
 public class EmpruntServiceImpl implements EmpruntService {
 
-    private static final Logger logger = LogManager.getLogger(LivreApplication.class);
+    private static final Logger logger = LogManager.getLogger(EmpruntServiceImpl.class);
 
     @Autowired
     EmpruntLivreDao empruntLivreDao;
@@ -57,8 +59,19 @@ public class EmpruntServiceImpl implements EmpruntService {
      */
     @Override
     public List<Emprunt> findAllByPseudoEmprunteur(String pseudoEmprunteur) {
+
         logger.debug("Appel empruntService méthode findAllByPseudoEmprunteur avec paramètre pseudoEmprunteur : " + pseudoEmprunteur);
-        return empruntLivreDao.findAllByPseudoEmprunteurAndCloturerIsFalseOrderByDateDebutAsc(pseudoEmprunteur);
+        List<Emprunt> emprunts= empruntLivreDao.findAllByPseudoEmprunteurAndCloturerIsFalseOrderByDateDebutAsc(pseudoEmprunteur);
+
+        for (Emprunt e: emprunts) {
+            if ( e.getDateFin().before(new Date()) && e.isProlongeable()== true){
+
+                e.setProlongeable(false);
+            }
+            empruntLivreDao.save(e);
+        }
+
+      return empruntLivreDao.findAllByPseudoEmprunteurAndCloturerIsFalseOrderByDateDebutAsc(pseudoEmprunteur);
     }
 
     /**
@@ -83,7 +96,7 @@ public class EmpruntServiceImpl implements EmpruntService {
      * @return l'emprunt prolongé
      */
     @Override
-    public Emprunt prolongerEmprunt(Long idEmprunt) {
+    public ResponseEntity<Emprunt> prolongerEmprunt(Long idEmprunt) {
 
         logger.debug("Appel empruntService méthode prolongerEmprunt avec paramètre idEmprunt : " + idEmprunt);
 
@@ -94,10 +107,12 @@ public class EmpruntServiceImpl implements EmpruntService {
             emprunt.setDateFin(ajouter4Semaines( emprunt.getDateFin()));
             emprunt.setProlongeable(false);
             empruntLivreDao.save(emprunt);
-            return emprunt;
+            return ResponseEntity.ok(emprunt);
 
         } else {
-            return null ;
+            return new ResponseEntity(
+                    "Ne peut pas être prolongé",
+                    HttpStatus.BAD_REQUEST);
         }
 
     }

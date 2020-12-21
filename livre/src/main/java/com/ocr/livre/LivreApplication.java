@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.annotation.PostConstruct;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -73,7 +74,7 @@ private EmpruntServiceImpl empruntService;
 		emprunt2.setDateFin(empruntService.ajouter4Semaines(emprunt2.getDateDebut()));
 		empruntLivreDao.save(emprunt2);
 
-		Emprunt emprunt3 = new Emprunt("user",new GregorianCalendar(2020,8,01).getTime(),true,false,livre7);
+		Emprunt emprunt3 = new Emprunt("user",new GregorianCalendar(2020, Calendar.DECEMBER,15).getTime(),true,false,livre7);
 		emprunt3.setDateFin(empruntService.ajouter4Semaines(emprunt3.getDateDebut()));
 		empruntLivreDao.save(emprunt3);
 
@@ -85,7 +86,7 @@ private EmpruntServiceImpl empruntService;
 		emprunt5.setDateFin(empruntService.ajouter4Semaines(emprunt5.getDateDebut()));
 		empruntLivreDao.save(emprunt5);
 
-		Emprunt emprunt6 = new Emprunt("admin",new GregorianCalendar(2020,06,06).getTime(),true,false,livre8);
+		Emprunt emprunt6 = new Emprunt("admin",new GregorianCalendar(2020,Calendar.DECEMBER,12).getTime(),true,false,livre8);
 		emprunt6.setDateFin(empruntService.ajouter4Semaines(emprunt6.getDateDebut()));
 		empruntLivreDao.save(emprunt6);
 

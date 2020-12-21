@@ -58,14 +58,8 @@ public class EmpruntController {
 
         logger.debug("Appel controlleur prolongerEmprunt");
 
-        Emprunt emprunt = empruntService.prolongerEmprunt(idEmprunt);
 
-        if (emprunt != null){
-            return ResponseEntity.ok(emprunt);
-        }
-        return new ResponseEntity(
-                "Ne peut pas être prolongé",
-                HttpStatus.BAD_REQUEST);
+        return empruntService.prolongerEmprunt(idEmprunt);
     }
 
     /**
