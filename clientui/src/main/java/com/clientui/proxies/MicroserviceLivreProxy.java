@@ -66,7 +66,7 @@ public interface MicroserviceLivreProxy {
      *
      */
     @PutMapping("/microservicelivre/emprunt/{id}/prolonger")
-    EmpruntBean prolongerEmprunt(@PathVariable ("id") Long idEmprunt);
+    void prolongerEmprunt(@PathVariable ("id") Long idEmprunt);
 
 
 }
