@@ -50,30 +50,23 @@ public class ClientController {
         UtilisateurBean utilisateur = (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("utilisateur", utilisateur);
 
-        List<EmpruntBean> listEmprunt = livreProxy.listeDEmpruntParUtilisateur(utilisateur.getUsername());
-        model.addAttribute("listEmprunt", listEmprunt);
+        List<EmpruntBean> listEmprunt= livreProxy.listeDEmpruntParUtilisateur(utilisateur.getUsername());
+        model.addAttribute("listEmprunt",listEmprunt);
 
-        List<ReservationBean> listeReservation = livreProxy.listeReservationUtilisateur(utilisateur.getUsername());
-        model.addAttribute("listeReservation", listeReservation);
-
-        model.addAttribute("livres", listEmprunt);
+        model.addAttribute("livres",listEmprunt);
 
         return "/MonProfile";
 
     }
 
-    @GetMapping(value = "/emprunt/prolongerEmprunt/{id}")
-    public String prolongerEmprunt(@PathVariable("id") Long idEmprunt, Model model) {
+    @GetMapping(value ="/emprunt/{id}/prolonger")
+    public String prolongerEmprunt(@PathVariable("id")Long idEmprunt) {
 
         System.out.println("Appel Emprunt méthode prolongerEmprunt");
 
         UtilisateurBean utilisateur = (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         livreProxy.prolongerEmprunt(idEmprunt);
-
-        List<EmpruntBean> listEmprunt = livreProxy.listeDEmpruntParUtilisateur(utilisateur.getUsername());
-        model.addAttribute("listEmprunt", listEmprunt);
-
 
         return "redirect:/MonProfile";
     }
