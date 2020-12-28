@@ -40,6 +40,7 @@ public class ClientController {
 
         model.addAttribute("livre", livre);
 
+
         return "fiche-livre";
     }
 
@@ -55,7 +56,7 @@ public class ClientController {
 
         model.addAttribute("livres",listEmprunt);
 
-        return "/MonProfile";
+        return "MonProfile";
 
     }
 
@@ -77,7 +78,22 @@ public class ClientController {
         return "redirect:/MonProfile";
     }
 
+    @GetMapping("/livre/{id}/reserver")
+    public String creerUneReservation(@PathVariable("id" )Long id, Model model) {
 
+        UtilisateurBean utilisateur = (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+
+        livreProxy.creerUneReservation(id,utilisateur.getUsername());
+
+        List<EmpruntBean> listEmprunt = livreProxy.listeDEmpruntParUtilisateur(utilisateur.getUsername());
+        model.addAttribute("listEmprunt", listEmprunt);
+
+        List<ReservationBean> listeReservation = livreProxy.listeReservationUtilisateur(utilisateur.getUsername());
+        model.addAttribute("listeReservation", listeReservation);
+
+        return "MonProfile";
+    }
 
 
     @GetMapping(value = "/reservation/{id}/annuler")
@@ -93,9 +109,7 @@ public class ClientController {
         List<ReservationBean> listeReservation = livreProxy.listeReservationUtilisateur(utilisateur.getUsername());
         model.addAttribute("listeReservation", listeReservation);
 
-        model.addAttribute("livres", listEmprunt);
-
-        return "redirect:/MonProfile";
+         return "redirect:/MonProfile";
     }
 }
 

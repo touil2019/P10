@@ -2,6 +2,7 @@ package com.ocr.livre.service;
 
 import com.ocr.livre.model.Reservation;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,5 +19,9 @@ public interface ReservationService {
     void deleteById(Long id);
 
     void annulerReservation(Long id, String pseudoEmprunteur);
+
+    void creerUneReservation (Long id, String pseudoEmprunteur);
+
+    Date ajouter2Jours(Date date);
 
 }

@@ -7,10 +7,7 @@ import com.clientui.beans.ReservationBean;
 import com.clientui.configuration.FeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -85,4 +82,6 @@ MicroserviceLivreProxy {
     @GetMapping(value="/microservicelivre/reservation/{id}/pseudo/{pseudoEmprunteur}/annuler")
     List<ReservationBean>annulerReservation(@PathVariable("id") Long id,@PathVariable("pseudoEmprunteur") String pseudoEmprunteur);
 
+    @PostMapping("/microservicelivre/reservation/livre/{id}/utilisateur/{pseudoEmprunteur}")
+    void creerUneReservation(@PathVariable("id") Long id,@PathVariable("pseudoEmprunteur") String pseudoEmprunteur);
 }

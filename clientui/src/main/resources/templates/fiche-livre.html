@@ -49,6 +49,7 @@
                     <label>Edition:</label> <p th:text= "${livre.edition}"></p>
                     <label>Nombre d exemplaire:</label> <p th:text= "${livre.quantiteDispo}"></p>
                 </div>
+                <a class="btn btn-primary" style="width:130px" th:href="@{/livre/{id}/reserver(id=${livre.id})}">Reservation</a>
             </div>
 
 

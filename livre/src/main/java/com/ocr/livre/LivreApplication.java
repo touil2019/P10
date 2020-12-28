@@ -108,12 +108,25 @@ private ReservationDao reservationDao;
 
 		emailDao.save(email);
 
-		Reservation reservation1 = new Reservation( livre2,"user",new GregorianCalendar(2020,12,02).getTime(), new GregorianCalendar(2021,01,02).getTime(),null,1, true);
+		Reservation reservation1 = new Reservation( livre2,"user",new GregorianCalendar(2020,12,02).getTime(), new GregorianCalendar(2021,01,02).getTime());
 		reservationDao.save(reservation1);
-		Reservation reservation2 = new Reservation(livre4,"user",new GregorianCalendar(2020,12,02).getTime(), new GregorianCalendar(2021,01,02).getTime(),null,1, true);
+		Reservation reservation2 = new Reservation(livre4,"user",new GregorianCalendar(2020,12,02).getTime(), new GregorianCalendar(2021,01,02).getTime());
 		reservationDao.save(reservation2);
-		Reservation reservation3 = new Reservation(livre8,"admin",new GregorianCalendar(2020,12,02).getTime(), new GregorianCalendar(2021,01,02).getTime(),null,2, true);
+		Reservation reservation3 = new Reservation(livre8,"admin",new GregorianCalendar(2020,12,02).getTime(), new GregorianCalendar(2021,01,02).getTime());
 		reservationDao.save(reservation3);
+
+		Email email2 = new Email();
+		email2.setNom("notification");
+		email2.setObjet("notification de disponiblité");
+		email2.setContenu("Bonjour [USERNAME], \n "+
+				"\n"+
+				"\tBonjour, le livre [LIVRE_TITRE] que vous avez réservé est de nouveau disponible à la blibliothèque .\n" +
+				"Vous disposez de 48h à partir du [DATE_RENDU] pour venir retirer votre exemplaire, passé ce délai vous sortirez de la liste d'attente.\n" +
+				"Dans l'attente de votre visite.\n" +
+				"\n"+
+				"Cordialement.");
+
+		emailDao.save(email2);
 
 	}
 }
