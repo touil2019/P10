@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,5 +30,9 @@ public interface LivreDao extends JpaRepository<Livre, Long> {
      List<Livre>chercher(@Param("x") String mc);
 
    List<Livre> findAllByTitre(String titre);
+
+   List<Livre> findLivreByQuantiteDispoIsNull();
+
+
 
 }

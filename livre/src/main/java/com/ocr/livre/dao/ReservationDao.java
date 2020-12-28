@@ -14,7 +14,6 @@ public interface ReservationDao extends JpaRepository<Reservation, Long> {
     List<Reservation> findAllByPseudoEmprunteurAndEnCoursIsTrue(String pseudoEmprunteur);
 
 
-   // List<Reservation>findReservationByLivre();
 
     void deleteById(Long Id);
 

@@ -5,7 +5,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Reservation implements Serializable {
+public class
+
+Reservation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,15 +34,13 @@ public class Reservation implements Serializable {
         super();
     }
 
-    public Reservation( Livre livre ,String pseudoEmprunteur, Date dateReservation, Date dateDeRetour, Date dateNotification, Integer position, boolean enCours) {
+    public Reservation( Livre livre ,String pseudoEmprunteur, Date dateReservation, Date dateDeRetour) {
 
         this.livre = livre;
         this.pseudoEmprunteur = pseudoEmprunteur;
         this.dateReservation = dateReservation;
         this.dateDeRetour = dateDeRetour;
-        this.dateNotification = dateNotification;
-        this.position = position;
-        this.enCours = enCours;
+        this.enCours = true;
     }
 
     public Long getId() {
