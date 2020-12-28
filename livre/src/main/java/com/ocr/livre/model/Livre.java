@@ -45,6 +45,8 @@ public class Livre {
      */
     private int quantiteDispo ;
 
+    private boolean reservable;
+
 
 
 
@@ -75,6 +77,7 @@ public class Livre {
         this.titre = titre;
         this.edition = edition;
         this.image = image;
+        this.reservable= true;
 
 
     }
@@ -146,7 +149,15 @@ public class Livre {
         this.quantiteDispo = quantiteDispo;
     }
 
-     @Override
+    public boolean isReservable() {
+        return reservable;
+    }
+
+    public void setReservable(boolean reservable) {
+        this.reservable = reservable;
+    }
+
+    @Override
     public String toString() {
         return "Livre{" +
                 "id=" + id +

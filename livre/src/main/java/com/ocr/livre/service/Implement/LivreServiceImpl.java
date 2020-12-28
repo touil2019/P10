@@ -63,13 +63,22 @@ import java.util.List;
 
             Livre livre= livreDao.findById(idLivre).get();
 
-            List<Livre> livres= livreDao.findAllByTitre(livre.getTitre());
 
+            List<Livre> livres= livreDao.findAllByTitre(livre.getTitre());
 
             List<Emprunt> emprunts= empruntLivreDao.listeDEmpruntActifParLivre(livre.getTitre());
 
             livre.setQuantiteDispo(livres.size() - emprunts.size());
 
+            livreDao.save(livre);
+
+            if( livre.getQuantiteDispo()==0){
+
+            livre.setReservable(true);
+
+            } else{
+                livre.setReservable(false);
+            }
             return livre;
         }
 
@@ -106,6 +115,7 @@ import java.util.List;
 
             livreDao.deleteById(idLivre);
         }
+
 
 
     }

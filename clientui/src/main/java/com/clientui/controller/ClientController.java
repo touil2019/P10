@@ -54,7 +54,8 @@ public class ClientController {
         List<EmpruntBean> listEmprunt= livreProxy.listeDEmpruntParUtilisateur(utilisateur.getUsername());
         model.addAttribute("listEmprunt",listEmprunt);
 
-        model.addAttribute("livres",listEmprunt);
+        List<ReservationBean> listeReservation = livreProxy.listeReservationUtilisateur(utilisateur.getUsername());
+        model.addAttribute("listeReservation", listeReservation);
 
         return "MonProfile";
 
