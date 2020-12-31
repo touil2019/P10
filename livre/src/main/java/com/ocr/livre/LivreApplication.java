@@ -94,7 +94,6 @@ private ReservationDao reservationDao;
 		emprunt6.setDateFin(empruntService.ajouter4Semaines(emprunt6.getDateDebut()));
 		empruntLivreDao.save(emprunt6);
 
-
 		Email email = new Email();
 		email.setNom("relance");
 		email.setObjet("relance pour livre non rendu");

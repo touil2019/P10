@@ -62,8 +62,10 @@ public class ClientController {
     }
 
 
+
     @GetMapping(value ="/emprunt/{id}/prolonger")
     public String prolongerEmprunt(@PathVariable("id")Long idEmprunt) {
+
 
 
         System.out.println("Appel Emprunt méthode prolongerEmprunt");
@@ -73,9 +75,6 @@ public class ClientController {
         livreProxy.prolongerEmprunt(idEmprunt);
 
 
-
-
-
         return "redirect:/MonProfile";
     }
 
@@ -83,7 +82,6 @@ public class ClientController {
     public String creerUneReservation(@PathVariable("id" )Long id, Model model) {
 
         UtilisateurBean utilisateur = (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
 
         livreProxy.creerUneReservation(id,utilisateur.getUsername());
 
@@ -99,6 +97,7 @@ public class ClientController {
 
     @GetMapping(value = "/reservation/{id}/annuler")
     public String annulerReservation(@PathVariable("id") Long id, Model model) {
+
 
 
         UtilisateurBean utilisateur = (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

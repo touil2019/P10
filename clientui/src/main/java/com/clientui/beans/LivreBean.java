@@ -45,8 +45,13 @@ public class LivreBean {
     private Set<EmpruntBean> emprunt;
 
 
+    private Set<ReservationBean> reservationBean;
+
+
+
     public LivreBean() {
     }
+
 
 
     public long getId() {
@@ -112,17 +117,19 @@ public class LivreBean {
     }
 
 
-    public boolean isPresent() {
-        return Present;
-    }
-
-    public Set<EmpruntBean> getEmprunt() {
-        return emprunt;
-    }
-
     public void setEmprunt(Set<EmpruntBean> emprunt) {
         this.emprunt = emprunt;
     }
+
+    public Set<ReservationBean> getReservationBean() {
+        return reservationBean;
+    }
+
+    public void setReservationBean(Set<ReservationBean> reservationBean) {
+        this.reservationBean = reservationBean;
+    }
+
+
 
     @Override
     public String toString() {
@@ -135,7 +142,10 @@ public class LivreBean {
                 ", image='" + image + '\'' +
                 ", quantiteDispo=" + quantiteDispo +
                 ", Present=" + Present +
-                ", emprunt=" + emprunt + '}';
+                ", emprunt=" + emprunt +
+                ", reservationBean=" + reservationBean +
+                '}';
+
     }
 }
 

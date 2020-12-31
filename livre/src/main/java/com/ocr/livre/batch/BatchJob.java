@@ -14,7 +14,7 @@ import javax.mail.MessagingException;
 @Component
 public class BatchJob {
 
-    private static final Logger logger = (Logger) LogManager.getLogger(BatchJob.class);
+    private static final Logger logger = LogManager.getLogger(BatchJob.class);
 
     @Autowired
     EmailService emailService;
