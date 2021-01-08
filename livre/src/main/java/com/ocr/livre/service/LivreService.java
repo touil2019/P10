@@ -17,4 +17,5 @@ public interface LivreService {
     Livre findLivreById(Long idLidvre);
 
 
+    Livre recupererUnLivreParUtilisateur(Long id, String pseudo);
 }

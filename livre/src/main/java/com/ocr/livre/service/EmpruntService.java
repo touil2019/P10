@@ -3,6 +3,7 @@ package com.ocr.livre.service;
 import com.ocr.livre.model.Emprunt;
 import org.springframework.http.ResponseEntity;
 
+import javax.mail.MessagingException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -15,9 +16,9 @@ public interface EmpruntService {
 
     List<Emprunt> findAllByPseudoEmprunteur(String pseudoEmprunteur);
 
-    Emprunt ouvrirEmprunt(Long idLivre, String pseudoEmprunteur);
+    ResponseEntity ouvrirEmprunt(String titre, String pseudoEmprunteur);
 
-    Emprunt cloturerEmprunt(Long idEmprunt);
+    ResponseEntity cloturerEmprunt(Long idEmprunt) throws MessagingException;
 
     Date ajouter4Semaines(Date date);
 

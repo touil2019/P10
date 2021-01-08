@@ -78,5 +78,11 @@ public class LivreController {
        livreService.supprimerLivre(idLivre);
     }
 
+
+    @GetMapping(value = "/Livre/{id}/utilisateur/{pseudo}")
+    public Livre recupererUnLivreParUtilisateur(@PathVariable("id") Long id,@PathVariable("pseudo") String pseudo){
+        return livreService.recupererUnLivreParUtilisateur(id,pseudo);
+    }
+
 }
 

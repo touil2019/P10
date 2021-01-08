@@ -52,22 +52,34 @@ private ReservationDao reservationDao;
 	@PostConstruct
 	public void postConstruct(){
 		Livre livre1 = new Livre("WRIGHT","Richard","Black Boy","GALLIMARD","https://images-na.ssl-images-amazon.com/images/I/41sH5979BrL._SX302_BO1,204,203,200_.jpg");
+		livre1.setDisponible(false);
+		livre1.setQuantiteDispo(1);
 		livreDao.save(livre1);
 		Livre livre2 = new Livre("WRIGHT","Richard","Black Boy","GALLIMARD","https://images-na.ssl-images-amazon.com/images/I/41sH5979BrL._SX302_BO1,204,203,200_.jpg");
+		livre2.setDisponible(false);
+		livre2.setQuantiteDispo(1);
 		livreDao.save(livre2);
-		Livre livre3 = new Livre("WRIGHT","Richard","Black Boy","GALLIMARD","https://images-na.ssl-images-amazon.com/images/I/41sH5979BrL._SX302_BO1,204,203,200_.jpg");
-		livreDao.save(livre3);
 		Livre livre4 = new Livre("STEINBECK","JOHN","Les Raisins De La Colere","GALLIMARD","https://images-na.ssl-images-amazon.com/images/I/418A1zRYhGL._SX302_BO1,204,203,200_.jpg");
+		livre4.setDisponible(false);
+		livre4.setQuantiteDispo(1);
 		livreDao.save(livre4);
 		Livre livre5 = new Livre("STEINBECK","JOHN","Les Raisins De La Colere","GALLIMARD","https://images-na.ssl-images-amazon.com/images/I/418A1zRYhGL._SX302_BO1,204,203,200_.jpg");
+		livre5.setDisponible(false);
+		livre5.setQuantiteDispo(1);
 		livreDao.save(livre5);
 		Livre livre6 = new Livre("STEINBECK","JOHN","Les Raisins De La Colere","GALLIMARD","https://images-na.ssl-images-amazon.com/images/I/418A1zRYhGL._SX302_BO1,204,203,200_.jpg");
+		livre6.setQuantiteDispo(1);
 		livreDao.save(livre6);
 		Livre livre7 = new Livre("LEE","Harper","Ne Tirez Pas Sur L'Oiseau Moqueur","LE LIVRE DE POCHE","https://m.media-amazon.com/images/I/41mY4e0kS9L.jpg");
+		livre7.setDisponible(false);
+		livre7.setQuantiteDispo(1);
 		livreDao.save(livre7);
 		Livre livre8 = new Livre("LEE","Harper","Ne Tirez Pas Sur L'Oiseau Moqueur","LE LIVRE DE POCHE","https://m.media-amazon.com/images/I/41mY4e0kS9L.jpg");
+		livre8.setDisponible(false);
+		livre8.setQuantiteDispo(1);
 		livreDao.save(livre8);
 		Livre livre9 = new Livre("LEE","Harper","Ne Tirez Pas Sur L'Oiseau Moqueur","LE LIVRE DE POCHE","https://m.media-amazon.com/images/I/41mY4e0kS9L.jpg");
+		livre9.setQuantiteDispo(1);
 		livreDao.save(livre9);
 
 		Emprunt emprunt1 = new Emprunt( "user", new GregorianCalendar(2020,07,12).getTime(), true,false,livre1 );
@@ -117,9 +129,9 @@ private ReservationDao reservationDao;
 		Email email2 = new Email();
 		email2.setNom("notification");
 		email2.setObjet("notification de disponiblité");
-		email2.setContenu("Bonjour [USERNAME], \n "+
+		email2.setContenu("Bonjour [NOMUTILISATEUR], \n "+
 				"\n"+
-				"\tBonjour, le livre [LIVRE_TITRE] que vous avez réservé est de nouveau disponible à la blibliothèque .\n" +
+				"\tBonjour, le livre [TITRELIVRE] que vous avez réservé est de nouveau disponible à la blibliothèque .\n" +
 				"Vous disposez de 48h à partir du [DATE_RENDU] pour venir retirer votre exemplaire, passé ce délai vous sortirez de la liste d'attente.\n" +
 				"Dans l'attente de votre visite.\n" +
 				"\n"+

@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface EmailDao extends JpaRepository<Email, Long> {
 
     Email findByNom(String relance);
+
+    Email findAllByNom(String nom);
 }

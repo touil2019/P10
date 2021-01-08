@@ -108,12 +108,15 @@ public class UtilisateurBean implements UserDetails {
         if ( userRoleList == null ) userRoleList = new HashSet<>();
         userRoleList.add(authority);
     }
+
     @Override
-    public String toString(){
-        return "UtilisateurLivre{"+
+    public String toString() {
+        return "UtilisateurBean{" +
                 "id=" + id +
-                ", username=" + username +
-                ", email=" + email +
-                ", password=" + password +"}";
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", userRoleList=" + userRoleList +
+                '}';
     }
 }

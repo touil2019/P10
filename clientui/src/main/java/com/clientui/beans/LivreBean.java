@@ -47,6 +47,8 @@ public class LivreBean {
 
     private Set<ReservationBean> reservationBean;
 
+    private boolean reservable;
+
 
 
     public LivreBean() {
@@ -129,7 +131,13 @@ public class LivreBean {
         this.reservationBean = reservationBean;
     }
 
+    public boolean isReservable() {
+        return reservable;
+    }
 
+    public void setReservable(boolean reservable) {
+        this.reservable = reservable;
+    }
 
     @Override
     public String toString() {

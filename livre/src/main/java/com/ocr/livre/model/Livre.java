@@ -47,6 +47,8 @@ public class Livre {
 
     private boolean reservable;
 
+    private boolean disponible;
+
 
 
 
@@ -78,6 +80,7 @@ public class Livre {
         this.edition = edition;
         this.image = image;
         this.reservable= true;
+        this.disponible= true;
 
 
     }
@@ -157,6 +160,14 @@ public class Livre {
         this.reservable = reservable;
     }
 
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
     @Override
     public String toString() {
         return "Livre{" +
@@ -166,11 +177,13 @@ public class Livre {
                 ", titre='" + titre + '\'' +
                 ", edition='" + edition + '\'' +
                 ", image='" + image + '\'' +
-                ", quantiteDispo='" + quantiteDispo + '\''+
-                ", emprunt='" + emprunt + '\''+
+                ", quantiteDispo=" + quantiteDispo +
+                ", reservable=" + reservable +
+                ", disponible=" + disponible +
+                ", emprunt=" + emprunt +
+                ", reservations=" + reservations +
                 '}';
     }
-
 
     public Set<Reservation> getReservations() {
         return reservations;

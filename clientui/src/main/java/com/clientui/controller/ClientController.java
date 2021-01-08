@@ -36,9 +36,19 @@ public class ClientController {
     public String ficheLivre(@PathVariable Long id, Model model) {
 
 
-        LivreBean livre = livreProxy.recupererUnLivre(id);
+        UtilisateurBean utilisateur = getUserConnected();
 
-        model.addAttribute("livre", livre);
+        if(utilisateur==null){
+
+            LivreBean livre = livreProxy.recupererUnLivre(id);
+            model.addAttribute("livre", livre);
+
+        }else{
+
+            LivreBean livre = livreProxy.recupererUnLivreParUtilisateur(id, utilisateur.getUsername());
+            model.addAttribute("livre", livre);
+
+        }
 
 
         return "fiche-livre";
@@ -110,6 +120,14 @@ public class ClientController {
         model.addAttribute("listeReservation", listeReservation);
 
          return "redirect:/MonProfile";
+    }
+
+    private UtilisateurBean getUserConnected(){
+
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof UtilisateurBean){
+            return  (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        }
+        return null;
     }
 }
 

@@ -22,6 +22,8 @@ Reservation implements Serializable {
 
     private Date dateNotification;
 
+    private boolean notified;
+
     private Integer position;
 
     private boolean enCours;
@@ -51,9 +53,7 @@ Reservation implements Serializable {
         this.id = id;
     }
 
-    public String getPseudoEmprunteur() {
-        return pseudoEmprunteur;
-    }
+    public String getPseudoEmprunteur() {  return pseudoEmprunteur; }
 
     public void setPseudoEmprunteur(String pseudoEmprunteur) {
         this.pseudoEmprunteur = pseudoEmprunteur;
@@ -107,16 +107,22 @@ Reservation implements Serializable {
         this.livre = livre;
     }
 
+    public boolean isNotified() { return notified; }
+
+    public void setNotified(boolean notified) { this.notified = notified; }
+
     @Override
     public String toString() {
         return "Reservation{" +
                 "id=" + id +
-                ", pseudoEmprunteur=" + pseudoEmprunteur +
+                ", pseudoEmprunteur='" + pseudoEmprunteur + '\'' +
                 ", dateReservation=" + dateReservation +
                 ", dateDeRetour=" + dateDeRetour +
                 ", dateNotification=" + dateNotification +
+                ", notified=" + notified +
                 ", position=" + position +
                 ", enCours=" + enCours +
+                ", livre=" + livre +
                 '}';
     }
 }

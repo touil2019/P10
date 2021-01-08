@@ -84,4 +84,7 @@ MicroserviceLivreProxy {
 
     @PostMapping("/microservicelivre/reservation/livre/{id}/utilisateur/{pseudoEmprunteur}")
     void creerUneReservation(@PathVariable("id") Long id,@PathVariable("pseudoEmprunteur") String pseudoEmprunteur);
+
+    @GetMapping(value = "/microservicelivre/Livre/{id}/utilisateur/{pseudo}")
+    LivreBean recupererUnLivreParUtilisateur(@PathVariable("id") Long id,@PathVariable("pseudo") String pseudo);
 }

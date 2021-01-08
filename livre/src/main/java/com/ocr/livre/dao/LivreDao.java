@@ -31,6 +31,10 @@ public interface LivreDao extends JpaRepository<Livre, Long> {
 
    List<Livre> findAllByTitre(String titre);
 
+   List<Livre> findAllByTitreAndDisponibleIsTrue(String titre);
+
+    List<Livre> findAllByTitreAndDisponibleIsFalse(String titre);
+
 
 
 

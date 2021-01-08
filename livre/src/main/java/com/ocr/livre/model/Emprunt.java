@@ -114,8 +114,8 @@ public class Emprunt implements Serializable {
         return cloturer;
     }
 
-    public void setCloturer(boolean enCours) {
-        this.cloturer = enCours;
+    public void setCloturer(boolean cloturer) {
+        this.cloturer = cloturer;
     }
 
     public Livre getLivre() {
