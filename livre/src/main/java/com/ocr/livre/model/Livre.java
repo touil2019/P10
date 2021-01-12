@@ -28,9 +28,11 @@ public class Livre {
      * Prenom de l auteur du livre
      */
     private String auteurPrenom ;
+
     /**
      * titre du livre
      */
+    @Column(name="titre_livre")
     private String titre ;
     /**
      * edition du livre

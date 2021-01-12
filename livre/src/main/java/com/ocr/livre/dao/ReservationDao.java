@@ -22,4 +22,6 @@ public interface ReservationDao extends JpaRepository<Reservation, Long> {
 
     List<Reservation> findAllByLivre_TitreAndEnCoursIsTrueAndNotifiedIsTrueOrderByDateReservationAsc(String titre);
 
+    List<Reservation> findAllByLivre_TitreAndAndEnCoursIsTrueOrderByDateReservationAsc(String titre);
+
 }

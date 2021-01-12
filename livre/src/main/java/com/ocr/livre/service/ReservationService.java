@@ -2,6 +2,7 @@ package com.ocr.livre.service;
 
 import com.ocr.livre.model.Reservation;
 
+import javax.mail.MessagingException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -24,4 +25,5 @@ public interface ReservationService {
 
     Date ajouter2Jours(Date date);
 
+    void purgeFileAttente() throws MessagingException;
 }

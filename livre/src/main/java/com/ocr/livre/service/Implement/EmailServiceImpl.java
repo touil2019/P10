@@ -3,8 +3,12 @@ package com.ocr.livre.service.Implement;
 import com.ocr.livre.LivreApplication;
 import com.ocr.livre.beans.UtilisateurBean;
 import com.ocr.livre.dao.EmailDao;
+import com.ocr.livre.dao.LivreDao;
+import com.ocr.livre.dao.ReservationDao;
 import com.ocr.livre.model.Email;
 import com.ocr.livre.model.Emprunt;
+import com.ocr.livre.model.Livre;
+import com.ocr.livre.model.Reservation;
 import com.ocr.livre.proxies.MicroserviceUtilisateurProxy;
 import com.ocr.livre.service.EmailService;
 import com.ocr.livre.service.EmpruntService;
@@ -13,12 +17,12 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,22 +36,29 @@ public class EmailServiceImpl implements EmailService {
     private JavaMailSenderImpl sender;
 
     @Autowired
-    private EmpruntService empruntService ;
+    private EmpruntService empruntService;
 
     @Autowired
-    MicroserviceUtilisateurProxy microserviceUtilisateurProxy ;
+    MicroserviceUtilisateurProxy microserviceUtilisateurProxy;
 
     @Autowired
-    EmailDao emailDao ;
+    EmailDao emailDao;
+
+    @Autowired
+    ReservationDao reservationDao;
+
+    @Autowired
+    LivreDao livreDao;
 
     /**
      * envoi d un email
-     * @param email adresse email
-     * @param objet objet de l email
+     *
+     * @param email   adresse email
+     * @param objet   objet de l email
      * @param contenu contenu de l email
      * @throws MessagingException
      */
-  @Override
+    @Override
     public void sendSimpleMessage(String email, String objet, String contenu) throws MessagingException {
 
         logger.info("Appel EmailServiceImpl méthode sendSimpleMessage à l'adresse : " + email);
@@ -64,15 +75,16 @@ public class EmailServiceImpl implements EmailService {
 
     /**
      * methode pour l envoye d une relance par email
+     *
      * @throws MessagingException
      */
-   @Override
+    @Override
     public void envoyerEmailRelance() throws MessagingException {
 
         Email email = emailDao.findByNom("relance");
         List<Emprunt> listeEmpruntNonRendue = empruntService.listeLivreNonRendueApresDateFin();
 
-        for (Emprunt e: listeEmpruntNonRendue) {
+        for (Emprunt e : listeEmpruntNonRendue) {
 
             Date dateFin = e.getDateFin();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -80,14 +92,16 @@ public class EmailServiceImpl implements EmailService {
 
             UtilisateurBean utilisateur = microserviceUtilisateurProxy.recupererUnUtilisateur(e.getPseudoEmprunteur());
 
-            logger.info("Appel EmailServiceImpl méthode envoyerEmailRelance à l'adresse : " + utilisateur.getEmail() + " pour le livre : " +e.getLivre().getTitre() + " pour l'emprunt id : " + e.getIdEmprunt());
+            logger.info("Appel EmailServiceImpl méthode envoyerEmailRelance à l'adresse : " + utilisateur.getEmail() + " pour le livre : " + e.getLivre().getTitre() + " pour l'emprunt id : " + e.getIdEmprunt());
 
             String text = email.getContenu()
                     .replace("[NOMUTILISATEUR]", e.getPseudoEmprunteur())
                     .replace("[TITRELIVRE]", e.getLivre().getTitre())
                     .replace("[DATEFIN]", strDate);
 
-            sendSimpleMessage(utilisateur.getEmail(), email.getObjet(),text);
+            sendSimpleMessage(utilisateur.getEmail(), email.getObjet(), text);
         }
     }
+
+
 }

@@ -11,4 +11,5 @@ public interface EmailDao extends JpaRepository<Email, Long> {
     Email findByNom(String relance);
 
     Email findAllByNom(String nom);
+
 }
