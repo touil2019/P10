@@ -16,6 +16,8 @@ public class ReservationBean {
 
         private Date dateNotification;
 
+        private boolean notified;
+
         private Integer position;
 
         private boolean enCours;
@@ -69,7 +71,15 @@ public class ReservationBean {
             this.dateNotification = dateNotification;
         }
 
-        public Integer getPosition() {
+    public boolean isNotified() {
+        return notified;
+    }
+
+    public void setNotified(boolean notified) {
+        this.notified = notified;
+    }
+
+    public Integer getPosition() {
             return position;
         }
 
@@ -93,19 +103,20 @@ public class ReservationBean {
             this.livre = livre;
         }
 
-        @Override
-        public String toString() {
-            return "Reservation{" +
-                    "id=" + id +
-                    ", pseudoEmprunteur='" + pseudoEmprunteur + '\'' +
-                    ", dateReservation=" + dateReservation +
-                    ", dateDeRetour=" + dateDeRetour +
-                    ", dateNotification=" + dateNotification +
-                    ", position=" + position +
-                    ", enCours=" + enCours +
-                    ",livre=" + livre +
-                    '}';
-        }
+    @Override
+    public String toString() {
+        return "ReservationBean{" +
+                "id=" + id +
+                ", pseudoEmprunteur='" + pseudoEmprunteur + '\'' +
+                ", dateReservation=" + dateReservation +
+                ", dateDeRetour=" + dateDeRetour +
+                ", dateNotification=" + dateNotification +
+                ", notified=" + notified +
+                ", position=" + position +
+                ", enCours=" + enCours +
+                ", livre=" + livre +
+                '}';
     }
+}
 
 

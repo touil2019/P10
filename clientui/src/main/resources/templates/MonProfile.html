@@ -60,7 +60,7 @@
 
                         <label>Date de retour</label><label th:text="${#dates.format(reservation.dateDeRetour, 'dd-MM-yyyy')}"></label><br/>
 
-                        <label>Date de notification</label><label th:text="${#dates.format(reservation.dateNotification, 'dd-MM-yyyy')}"></label><br/>
+                        <label th:if="${reservation.notified}">Date de notification</label><label th:if="${reservation.notified}" th:text="${#dates.format(reservation.dateNotification, 'dd-MM-yyyy')}"></label><br/>
 
                         <label>Position</label><label th:text="${reservation.position}"></label><br/>
 

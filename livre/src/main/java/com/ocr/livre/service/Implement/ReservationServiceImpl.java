@@ -63,7 +63,31 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public List<Reservation> findReservationByPseudoEmprunteur(String pseudoEmprunteur) {
-        return reservationDao.findAllByPseudoEmprunteurAndEnCoursIsTrue( pseudoEmprunteur);
+
+        Date dateDuJour= new Date();
+
+        List<Reservation> reservations= new ArrayList<>();
+
+        reservations =  reservationDao.findAllByPseudoEmprunteurAndEnCoursIsTrue( pseudoEmprunteur);
+
+        for (Reservation r :reservations ) {
+
+            List<Reservation> reservationsParLivre= reservationDao.findAllByLivre_TitreAndAndEnCoursIsTrue(r.getLivre().getTitre());
+
+            for (int i=0;i< reservationsParLivre.size();i++) {
+
+                Reservation rl= reservationsParLivre.get(i);
+                if( r==rl){
+                    r.setPosition(i+1);
+                    r.setDateNotification(ajouter2Jours(r.getDateReservation()));
+                    r.setNotified(true);
+                    reservationDao.save(r);
+                }
+            }
+        }
+
+
+        return  reservationDao.findAllByPseudoEmprunteurAndEnCoursIsTrue( pseudoEmprunteur);
     }
 
     @Override
@@ -98,6 +122,7 @@ public class ReservationServiceImpl implements ReservationService {
 
           Reservation reservation = new Reservation(livre,pseudoEmprunteur, new Date(), dateProchainRetour);
 
+
           reservationDao.save(reservation);
 
       }
@@ -128,6 +153,10 @@ public class ReservationServiceImpl implements ReservationService {
         return cal.getTime();
     }
 
+    /**
+     *
+     *
+     */
     @Override
     public void purgeFileAttente() throws MessagingException {
 
