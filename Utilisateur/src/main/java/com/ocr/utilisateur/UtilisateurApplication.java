@@ -54,35 +54,7 @@ private UtilisateurDao utilisateurDao;
 		test.setUserRoleList(test1UserRole);
 		utilisateurDao.save(test1);
 
-		UtilisateurLivre test2 = new UtilisateurLivre("test2","testuser3@gmail.com","test2");
-		Set<UtiRole> test2UserRole = new HashSet<>();
-		test2UserRole.add(UtiRole.USER);
-		test.setUserRoleList(test2UserRole);
-		utilisateurDao.save(test2);
 
-		UtilisateurLivre test3 = new UtilisateurLivre("test3","testuser4@gmail.com","test3");
-		Set<UtiRole> test3UserRole = new HashSet<>();
-		test3UserRole.add(UtiRole.USER);
-		test.setUserRoleList(test3UserRole);
-		utilisateurDao.save(test3);
-
-		UtilisateurLivre test4 = new UtilisateurLivre("test4","testuser5@gmail.com","test4");
-		Set<UtiRole> test4UserRole = new HashSet<>();
-		test4UserRole.add(UtiRole.USER);
-		test.setUserRoleList(test4UserRole);
-		utilisateurDao.save(test4);
-
-		UtilisateurLivre test5 = new UtilisateurLivre("test5","testuser6@gmail.com","test5");
-		Set<UtiRole> test5UserRole = new HashSet<>();
-		test5UserRole.add(UtiRole.USER);
-		test.setUserRoleList(test5UserRole);
-		utilisateurDao.save(test5);
-
-		UtilisateurLivre test6 = new UtilisateurLivre("test6","testuser7@gmail.com","test6");
-		Set<UtiRole> test6UserRole = new HashSet<>();
-		test6UserRole.add(UtiRole.USER);
-		test.setUserRoleList(test6UserRole);
-		utilisateurDao.save(test6);
 
 	}
 }

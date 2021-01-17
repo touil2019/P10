@@ -69,23 +69,23 @@ public class EmpruntController {
      * @param pseudoEmprunteur
      * @return
      */
-    @PostMapping(value = "/emprunt/{titre}")
-    public ResponseEntity ouvrirEmprunt(@PathVariable("titre") String titre, @RequestParam String pseudoEmprunteur){
+   @PostMapping(value = "/emprunt/{titre}/utilisateur/{pseudoEmprunteur}")
+    public ResponseEntity ouvrirEmpruntTest(@PathVariable("titre") String titre, @RequestParam String pseudoEmprunteur){
 
         logger.debug("Appel controlleur ouvrirEmprunt");
 
-        return empruntService.ouvrirEmprunt(titre, pseudoEmprunteur);
+        return empruntService.ouvrirEmpruntTest(titre, pseudoEmprunteur);
     }
 
     /**
      * cloture d un emprunt
-     * @param idEmprunt
+     * @param
      * @return
      */
-    @PutMapping(value = "emprunt/{id}/cloturer")
-    public ResponseEntity cloturerEmprunt(@PathVariable("id") Long idEmprunt) throws MessagingException {
+  @PutMapping(value = "emprunt/{id}/cloturer")
+    public ResponseEntity testcloturerEmprunt(@PathVariable("id") Long idEmprunt) throws MessagingException {
         logger.debug("Appel controlleur cloturerEmprunt");
-        return empruntService.cloturerEmprunt(idEmprunt);
+        return empruntService.cloturerEmpruntTest(idEmprunt);
     }
 
     /**
@@ -98,5 +98,19 @@ public class EmpruntController {
 
         return empruntService.listeLivreNonRendueApresDateFin();
     }
+
+  /*  @PostMapping(value = "/emprunt/{id}")
+    public ResponseEntity ouvrirEmprunt(@PathVariable("id") Long id, @RequestParam String pseudoEmprunteur){
+
+        logger.debug("Appel controlleur ouvrirEmprunt");
+
+        return empruntService.ouvrirEmprunt(id, pseudoEmprunteur);
+    }
+
+    @PutMapping(value = "emprunt/{id}/cloturer")
+    public ResponseEntity cloturerEmprunt(@PathVariable("id") Long idEmprunt) throws MessagingException {
+        logger.debug("Appel controlleur cloturerEmprunt");
+        return empruntService.cloturerEmprunt(idEmprunt);
+    }*/
 }
 

@@ -16,13 +16,16 @@ public interface EmpruntService {
 
     List<Emprunt> findAllByPseudoEmprunteur(String pseudoEmprunteur);
 
-    ResponseEntity ouvrirEmprunt(String titre, String pseudoEmprunteur);
+   ResponseEntity ouvrirEmpruntTest(String titre, String pseudoEmprunteur);
 
-    ResponseEntity cloturerEmprunt(Long idEmprunt) throws MessagingException;
+
+  ResponseEntity cloturerEmpruntTest(Long idEmprunt) throws MessagingException;
 
     Date ajouter4Semaines(Date date);
 
     ResponseEntity<Emprunt> prolongerEmprunt(Long idEmprunt);
 
     List<Emprunt> listeLivreNonRendueApresDateFin();
+
+
 }

@@ -53,73 +53,48 @@ private ReservationDao reservationDao;
 
 		/**Livres**/
 
+
 		Livre livre1 = new Livre("WRIGHT","Richard","Black Boy","GALLIMARD","https://images-na.ssl-images-amazon.com/images/I/41sH5979BrL._SX302_BO1,204,203,200_.jpg");
 		livre1.setDisponible(false);
-		livre1.setQuantiteDispo(1);
+		livre1.setQuantiteDispo(0);
 		livreDao.save(livre1);
-		Livre livre2 = new Livre("WRIGHT","Richard","Black Boy","GALLIMARD","https://images-na.ssl-images-amazon.com/images/I/41sH5979BrL._SX302_BO1,204,203,200_.jpg");
+		Livre livre2 = new Livre("STEINBECK","JOHN","Les Raisins De La Colere","GALLIMARD","https://images-na.ssl-images-amazon.com/images/I/418A1zRYhGL._SX302_BO1,204,203,200_.jpg");
 		livre2.setDisponible(false);
-		livre2.setQuantiteDispo(1);
+		livre2.setQuantiteDispo(0);
 		livreDao.save(livre2);
-		Livre livre4 = new Livre("STEINBECK","JOHN","Les Raisins De La Colere","GALLIMARD","https://images-na.ssl-images-amazon.com/images/I/418A1zRYhGL._SX302_BO1,204,203,200_.jpg");
-		livre4.setDisponible(false);
+
+		Livre livre3= new Livre("LEE","Harper","Ne Tirez Pas Sur L'Oiseau Moqueur","LE LIVRE DE POCHE","https://m.media-amazon.com/images/I/41mY4e0kS9L.jpg");
+		livre3.setDisponible(false);
+		livre3.setQuantiteDispo(1);
+		livreDao.save(livre3);
+		Livre livre4 = new Livre("LEE","Harper","Ne Tirez Pas Sur L'Oiseau Moqueur","LE LIVRE DE POCHE","https://m.media-amazon.com/images/I/41mY4e0kS9L.jpg");
+		livre4.setDisponible(true);
 		livre4.setQuantiteDispo(1);
 		livreDao.save(livre4);
-		Livre livre5 = new Livre("STEINBECK","JOHN","Les Raisins De La Colere","GALLIMARD","https://images-na.ssl-images-amazon.com/images/I/418A1zRYhGL._SX302_BO1,204,203,200_.jpg");
-		livre5.setDisponible(false);
-		livre5.setQuantiteDispo(1);
-		livreDao.save(livre5);
-		Livre livre6 = new Livre("STEINBECK","JOHN","Les Raisins De La Colere","GALLIMARD","https://images-na.ssl-images-amazon.com/images/I/418A1zRYhGL._SX302_BO1,204,203,200_.jpg");
-		livre6.setQuantiteDispo(1);
-		livreDao.save(livre6);
-		Livre livre7 = new Livre("LEE","Harper","Ne Tirez Pas Sur L'Oiseau Moqueur","LE LIVRE DE POCHE","https://m.media-amazon.com/images/I/41mY4e0kS9L.jpg");
-		livre7.setDisponible(false);
-		livre7.setQuantiteDispo(1);
-		livreDao.save(livre7);
-		Livre livre8 = new Livre("LEE","Harper","Ne Tirez Pas Sur L'Oiseau Moqueur","LE LIVRE DE POCHE","https://m.media-amazon.com/images/I/41mY4e0kS9L.jpg");
-		livre8.setDisponible(false);
-		livre8.setQuantiteDispo(1);
-		livreDao.save(livre8);
-		/*Livre livre9 = new Livre("LEE","Harper","Ne Tirez Pas Sur L'Oiseau Moqueur","LE LIVRE DE POCHE","https://m.media-amazon.com/images/I/41mY4e0kS9L.jpg");
-		livre9.setQuantiteDispo(1);
-		livreDao.save(livre9);*/
+
 
 
 		/**Emprunts du livre : Black Boy**/
 
-		Emprunt emprunt1 = new Emprunt( "user", new GregorianCalendar(2021,Calendar.JANUARY,11).getTime(), true,false,livre1 );
+		Emprunt emprunt1 = new Emprunt( "user", new GregorianCalendar(2020,Calendar.DECEMBER,15).getTime(), true,false,livre1 );
 		emprunt1.setDateFin(empruntService.ajouter4Semaines(emprunt1.getDateDebut()));
 		empruntLivreDao.save(emprunt1);
-
-		Emprunt emprunt2 = new Emprunt("admin",new GregorianCalendar(2020,Calendar.DECEMBER,28).getTime(),true,false,livre2);
-		emprunt2.setDateFin(empruntService.ajouter4Semaines(emprunt2.getDateDebut()));
-		empruntLivreDao.save(emprunt2);
 
 
 		/**Emprunts du livre : Les Raisins De La Colere**/
 
-		Emprunt emprunt3 = new Emprunt("user",new GregorianCalendar(2020, Calendar.DECEMBER,15).getTime(),true,false,livre4);
+		Emprunt emprunt2 = new Emprunt("admin",new GregorianCalendar(2020, Calendar.DECEMBER,15).getTime(),true,false,livre2);
+		emprunt2.setDateFin(empruntService.ajouter4Semaines(emprunt2.getDateDebut()));
+		empruntLivreDao.save(emprunt2);
+
+
+		/**Emprunts du livre : Ne Tirez Pas Sur L'Oiseau Moqueur**/
+
+		Emprunt emprunt3 = new Emprunt("admin",new GregorianCalendar(2020,Calendar.OCTOBER,12).getTime(),true,false,livre4);
 		emprunt3.setDateFin(empruntService.ajouter4Semaines(emprunt3.getDateDebut()));
 		empruntLivreDao.save(emprunt3);
 
 
-		Emprunt emprunt4 = new Emprunt("test",new GregorianCalendar(2020,Calendar.DECEMBER,28).getTime(),true,false,livre5);
-		emprunt4.setDateFin(empruntService.ajouter4Semaines(emprunt4.getDateDebut()));
-		empruntLivreDao.save(emprunt4);
-
-		Emprunt emprunt5 = new Emprunt("admin",new GregorianCalendar(2021,01,12).getTime(),true,false,livre6);
-		emprunt5.setDateFin(empruntService.ajouter4Semaines(emprunt5.getDateDebut()));
-		empruntLivreDao.save(emprunt5);
-
-		/**Emprunts du livre : Ne Tirez Pas Sur L'Oiseau Moqueur**/
-
-		Emprunt emprunt6 = new Emprunt("user",new GregorianCalendar(2020,Calendar.DECEMBER,12).getTime(),true,false,livre7);
-		emprunt6.setDateFin(empruntService.ajouter4Semaines(emprunt6.getDateDebut()));
-		empruntLivreDao.save(emprunt6);
-
-		Emprunt emprunt7 = new Emprunt("test",new GregorianCalendar(2020,Calendar.DECEMBER,12).getTime(),true,false,livre8);
-		emprunt7.setDateFin(empruntService.ajouter4Semaines(emprunt7.getDateDebut()));
-		empruntLivreDao.save(emprunt7);
 
 		/**Email de relance pour livre non rendu**/
 
@@ -138,41 +113,21 @@ private ReservationDao reservationDao;
 
 		/**Reservation du livre: Black Boy**/
 
-		Reservation reservation1 = new Reservation( livre2,"test1",new GregorianCalendar(2021,01,13).getTime(), new GregorianCalendar(2021,01,13).getTime());
+		Reservation reservation1 = new Reservation( livre1,"admin",new GregorianCalendar(2021,Calendar.JANUARY,9).getTime(), new GregorianCalendar(2021,Calendar.JANUARY,10).getTime());
+		reservation1.setNotified(true);
+		reservation1.setDateNotification(new GregorianCalendar(2021,Calendar.JANUARY,11).getTime());
 		reservationDao.save(reservation1);
-		Reservation reservation2 = new Reservation(livre1,"test2",new GregorianCalendar(2021,01,16).getTime(), new GregorianCalendar(2021,01,14).getTime());
+		Reservation reservation2 = new Reservation(livre1,"test",new GregorianCalendar(2021,Calendar.JANUARY,16).getTime(), new GregorianCalendar(2021,Calendar.JANUARY,14).getTime());
 		reservationDao.save(reservation2);
-		Reservation reservation3 = new Reservation( livre2,"test3",new GregorianCalendar(2021,01,15).getTime(), new GregorianCalendar(2021,01,13).getTime());
-		reservationDao.save(reservation3);
-		Reservation reservation4 = new Reservation(livre1,"test4",new GregorianCalendar(2021,01,8).getTime(), new GregorianCalendar(2021,01,06).getTime());
-		reservationDao.save(reservation4);
 
 
 		/**Reservation du livre: Ne tirez pas sur l'oiseau moqueur**/
 
-		Reservation reservation5 = new Reservation(livre7,"test1",new GregorianCalendar(2021,Calendar.JANUARY,24).getTime(), new GregorianCalendar(2021, Calendar.JANUARY,22).getTime());
-		reservationDao.save(reservation5);
-		Reservation reservation6 = new Reservation(livre8,"test2",new GregorianCalendar(2021,Calendar.JANUARY,17).getTime(), new GregorianCalendar(2021,Calendar.JANUARY,15).getTime());
-		reservationDao.save(reservation6);
-		Reservation reservation7 = new Reservation(livre7,"test3",new GregorianCalendar(2021,Calendar.JANUARY,18).getTime(), new GregorianCalendar(2021,Calendar.JANUARY,16).getTime());
-		reservationDao.save(reservation7);
-		Reservation reservation8 = new Reservation(livre8,"test4",new GregorianCalendar(2021,Calendar.JANUARY,18).getTime(), new GregorianCalendar(2021,Calendar.JANUARY,16).getTime());
-		reservationDao.save(reservation8);
+		Reservation reservation3 = new Reservation(livre4,"user",new GregorianCalendar(2021,Calendar.JANUARY,8).getTime(), new GregorianCalendar(2021,01,06).getTime());
+		reservationDao.save(reservation3);
 
 		/**Les Raisins De La Colere**/
 
-		Reservation reservation9 = new Reservation(livre4,"test1",new GregorianCalendar(2021,01,16).getTime(), new GregorianCalendar(2021,01,14).getTime());
-		reservationDao.save(reservation9);
-		Reservation reservation10 = new Reservation(livre5,"test2",new GregorianCalendar(2021,01,16).getTime(), new GregorianCalendar(2021,01,14).getTime());
-		reservationDao.save(reservation10);
-		Reservation reservation11 = new Reservation(livre6,"test3",new GregorianCalendar(2021,01,16).getTime(), new GregorianCalendar(2021,01,14).getTime());
-		reservationDao.save(reservation11);
-		Reservation reservation12 = new Reservation(livre6,"test4",new GregorianCalendar(2020,Calendar.DECEMBER,16).getTime(), new GregorianCalendar(2020,12,14).getTime());
-		reservationDao.save(reservation12);
-		Reservation reservation13 = new Reservation(livre5,"test5",new GregorianCalendar(2020,Calendar.DECEMBER,16).getTime(), new GregorianCalendar(2020,12,14).getTime());
-		reservationDao.save(reservation13);
-		Reservation reservation14 = new Reservation(livre5,"test6",new GregorianCalendar(2020,Calendar.DECEMBER,16).getTime(), new GregorianCalendar(2020,12,14).getTime());
-		reservationDao.save(reservation14);
 
 
 		/**Email de notification de disponibilité d'un livre**/

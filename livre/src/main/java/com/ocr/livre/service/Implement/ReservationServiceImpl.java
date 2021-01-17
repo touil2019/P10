@@ -64,8 +64,6 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<Reservation> findReservationByPseudoEmprunteur(String pseudoEmprunteur) {
 
-        Date dateDuJour= new Date();
-
         List<Reservation> reservations= new ArrayList<>();
 
         reservations =  reservationDao.findAllByPseudoEmprunteurAndEnCoursIsTrue( pseudoEmprunteur);
@@ -77,10 +75,8 @@ public class ReservationServiceImpl implements ReservationService {
             for (int i=0;i< reservationsParLivre.size();i++) {
 
                 Reservation rl= reservationsParLivre.get(i);
-                if( r==rl){
+                if( r==rl ){
                     r.setPosition(i+1);
-                    r.setDateNotification(ajouter2Jours(r.getDateReservation()));
-                    r.setNotified(true);
                     reservationDao.save(r);
                 }
             }

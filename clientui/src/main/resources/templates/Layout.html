@@ -36,7 +36,7 @@
         <nav class="nav navbar-nav">
             <ul class="navbar-nav m-auto">
                 <li  class="nav-item active"><a class="btn btn-primary" th:href="@{/}">Accueil</a></li>
-                <li class="nav-item"><a class="btn btn-primary" th:if="${#request.userPrincipal != null}" th:href="@{/Monprofile}">Mon Compte</a></li>
+                <li class="nav-item"><a class="btn btn-primary" th:if="${#request.userPrincipal != null}" th:href="@{/MonProfile}">Mon Compte</a></li>
                 <li class="nav-item"><a class="btn btn-primary" th:if="${#request.userPrincipal == null}" th:href="@{/connexion}">Connexion</a></li>
                 <li class="nav-item"><a class="btn btn-primary" th:href="@{/logout}" th:if="${#request.userPrincipal != null}" >Déconnexion</a></li>
                <li class="nav-item ml-6">

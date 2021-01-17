@@ -94,7 +94,7 @@ import java.util.List;
             List<Reservation> reservationsDunLivre= reservationDao.findAllByLivre_TitreAndAndEnCoursIsTrue(livre.getTitre());
 
             if( livre.getQuantiteDispo()==0 && reservationsDeUtilisateur.size()==0
-                    && empruntsDeUtilisateur.size()==0 && reservationsDunLivre.size()<= livres.size()*2){
+                    && empruntsDeUtilisateur.size()==0 && reservationsDunLivre.size()< livres.size()*2){
 
                 livre.setReservable(true);
 
@@ -103,6 +103,16 @@ import java.util.List;
             }
 
             return livre;
+        }
+
+        @Override
+        public List<Livre> findAllByIdAndDisponibleIsTrue(Long id) {
+            return livreDao.findAllByIdAndDisponibleIsTrue(id);
+        }
+
+        @Override
+        public List<Livre> findAllByIdAndDisponibleIsFalse(Long id) {
+            return livreDao.findAllByIdAndDisponibleIsFalse(id);
         }
 
         /**

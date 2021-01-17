@@ -49,4 +49,6 @@ public interface EmpruntLivreDao extends JpaRepository<Emprunt, Long> {
     List<Emprunt> listeDEmpruntActifParLivre(String titre);
 
     List<Emprunt> findAllByPseudoEmprunteurAndLivre_TitreAndCloturerIsFalse(String pseudoEmprunteur,String titre);
+
+
 }

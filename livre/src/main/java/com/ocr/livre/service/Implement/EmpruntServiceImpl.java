@@ -23,10 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @EnableScheduling
 @Service
@@ -155,6 +152,8 @@ public class EmpruntServiceImpl implements EmpruntService {
         return listeEmprunt;
     }
 
+
+
     /**
      * Enregistre un nouvel emprunt
      *
@@ -163,8 +162,8 @@ public class EmpruntServiceImpl implements EmpruntService {
      * @return le nouvel emprunt
      */
 
-    @Override
-    public ResponseEntity ouvrirEmprunt(String titre, String pseudoEmprunteur) {
+  @Override
+    public ResponseEntity ouvrirEmpruntTest(String titre, String pseudoEmprunteur) {
 
         logger.debug("Appel empruntService méthode ouvrirEmprunt");
 
@@ -172,8 +171,10 @@ public class EmpruntServiceImpl implements EmpruntService {
 
         if (livresDispo.size() > 0) {
             Livre livre = livresDispo.get(0);
+            livre.setDisponible(false);
+            livreDao.save(livre);
 
-            Emprunt nouvelEmprunt = new Emprunt("USER", new Date(), true, false, livre);
+            Emprunt nouvelEmprunt = new Emprunt(pseudoEmprunteur, new Date(), true, false, livre);
 
             Date date = new Date();
 
@@ -200,12 +201,12 @@ public class EmpruntServiceImpl implements EmpruntService {
     /**
      * cloteur un emprunt
      *
-     * @param idEmprunt
+     * @param
      * @return emprunt cloturer
      */
     @Transactional
     @Override
-    public ResponseEntity cloturerEmprunt(Long idEmprunt) throws MessagingException {
+    public ResponseEntity cloturerEmpruntTest(Long idEmprunt) throws MessagingException {
 
         logger.debug("Appel empruntService méthode cloturerEmprunt");
 
@@ -221,10 +222,10 @@ public class EmpruntServiceImpl implements EmpruntService {
 
             if (!emprunt.isCloturer()) {
                 List<Livre> livresIndisponible= livreDao.findAllByTitreAndDisponibleIsFalse(livre.getTitre());
-                Livre livreRendu= livresIndisponible.get(0);
-                livreRendu.setDisponible(true);
-                livreRendu.setQuantiteDispo(livreRendu.getQuantiteDispo()+1);
-                livreDao.save(livreRendu);
+
+                livre.setDisponible(true);
+                livre.setQuantiteDispo(livre.getQuantiteDispo()+1);
+                livreDao.save(livre);
                 emprunt.setCloturer(true);
                 empruntLivreDao.save(emprunt);
                 livresIndisponible= livreDao.findAllByTitreAndDisponibleIsFalse(livre.getTitre());
@@ -234,6 +235,7 @@ public class EmpruntServiceImpl implements EmpruntService {
                 }
 
                 List<Reservation> fileAttente = reservationDao.findAllByLivre_TitreAndEnCoursIsTrueAndNotifiedIsFalseOrderByDateReservationAsc(livre.getTitre());
+
                 if (!fileAttente.isEmpty()) {
                     Reservation reservation = fileAttente.get(0);
                     UtilisateurBean reservant = microserviceUtilisateurProxy.recupererUnUtilisateur(reservation.getPseudoEmprunteur());
@@ -250,4 +252,5 @@ public class EmpruntServiceImpl implements EmpruntService {
             } return new ResponseEntity<>("emprunt déjà clôturé", HttpStatus.BAD_REQUEST);
         } return new ResponseEntity<>("emprunt introuvable", HttpStatus.BAD_REQUEST);
     }
-}
+
+    }

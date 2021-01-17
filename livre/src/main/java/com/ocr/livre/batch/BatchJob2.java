@@ -19,7 +19,7 @@ public class BatchJob2 {
     @Autowired
     ReservationService reservationService;
 
-    @Scheduled(cron = "* */60 * * * *")
+    @Scheduled(cron = "*/60 * * * * *")
     public void lendingRevival() throws MessagingException {
         logger.info("Execution du batch de notification");
 

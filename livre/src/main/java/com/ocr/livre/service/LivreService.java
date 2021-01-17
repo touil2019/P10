@@ -18,4 +18,8 @@ public interface LivreService {
 
 
     Livre recupererUnLivreParUtilisateur(Long id, String pseudo);
+
+    List<Livre> findAllByIdAndDisponibleIsTrue(Long id);
+
+    List<Livre> findAllByIdAndDisponibleIsFalse(Long id);
 }
