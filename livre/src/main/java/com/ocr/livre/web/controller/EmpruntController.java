@@ -99,18 +99,6 @@ public class EmpruntController {
         return empruntService.listeLivreNonRendueApresDateFin();
     }
 
-  /*  @PostMapping(value = "/emprunt/{id}")
-    public ResponseEntity ouvrirEmprunt(@PathVariable("id") Long id, @RequestParam String pseudoEmprunteur){
 
-        logger.debug("Appel controlleur ouvrirEmprunt");
-
-        return empruntService.ouvrirEmprunt(id, pseudoEmprunteur);
-    }
-
-    @PutMapping(value = "emprunt/{id}/cloturer")
-    public ResponseEntity cloturerEmprunt(@PathVariable("id") Long idEmprunt) throws MessagingException {
-        logger.debug("Appel controlleur cloturerEmprunt");
-        return empruntService.cloturerEmprunt(idEmprunt);
-    }*/
 }
 
