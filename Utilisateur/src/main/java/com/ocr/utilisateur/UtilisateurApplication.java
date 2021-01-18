@@ -41,5 +41,20 @@ private UtilisateurDao utilisateurDao;
 		adminRole.add(UtiRole.ADMIN);
 		admin.setUserRoleList(adminRole);
 		utilisateurDao.save(admin);
+
+		UtilisateurLivre test = new UtilisateurLivre("test","testuser1@gmail.com","test");
+		Set<UtiRole> testUserRole = new HashSet<>();
+		testUserRole.add(UtiRole.USER);
+		test.setUserRoleList(testUserRole);
+		utilisateurDao.save(test);
+
+		UtilisateurLivre test1 = new UtilisateurLivre("test1","testuser2@gmail.com","test1");
+		Set<UtiRole> test1UserRole = new HashSet<>();
+		test1UserRole.add(UtiRole.USER);
+		test.setUserRoleList(test1UserRole);
+		utilisateurDao.save(test1);
+
+
+
 	}
 }

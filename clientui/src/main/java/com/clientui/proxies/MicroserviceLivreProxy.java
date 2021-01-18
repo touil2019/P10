@@ -3,13 +3,11 @@ package com.clientui.proxies;
 
 import com.clientui.beans.EmpruntBean;
 import com.clientui.beans.LivreBean;
+import com.clientui.beans.ReservationBean;
 import com.clientui.configuration.FeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +17,8 @@ import java.util.Optional;
  * Api Livre
  */
 @Component
-public interface MicroserviceLivreProxy {
+public interface
+MicroserviceLivreProxy {
     /**
      *
      * liste de livres
@@ -68,5 +67,24 @@ public interface MicroserviceLivreProxy {
     @PutMapping("/microservicelivre/emprunt/{id}/prolonger")
     void prolongerEmprunt(@PathVariable ("id") Long idEmprunt);
 
+    /**
+     *
+     * @param pseudoEmprunteur
+     * @return
+     */
+    @GetMapping(value = "/microservicelivre/reservation/pseudo/{pseudoEmprunteur}")
+    List<ReservationBean> listeReservationUtilisateur(@PathVariable("pseudoEmprunteur") String pseudoEmprunteur);
 
+    /**
+     *
+     * @param id
+     */
+    @GetMapping(value="/microservicelivre/reservation/{id}/pseudo/{pseudoEmprunteur}/annuler")
+    List<ReservationBean>annulerReservation(@PathVariable("id") Long id,@PathVariable("pseudoEmprunteur") String pseudoEmprunteur);
+
+    @PostMapping("/microservicelivre/reservation/livre/{id}/utilisateur/{pseudoEmprunteur}")
+    void creerUneReservation(@PathVariable("id") Long id,@PathVariable("pseudoEmprunteur") String pseudoEmprunteur);
+
+    @GetMapping(value = "/microservicelivre/Livre/{id}/utilisateur/{pseudo}")
+    LivreBean recupererUnLivreParUtilisateur(@PathVariable("id") Long id,@PathVariable("pseudo") String pseudo);
 }

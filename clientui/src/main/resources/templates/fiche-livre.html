@@ -42,13 +42,14 @@
                    <a>
                        <img  th:src="${livre.image}"   class="card-img-top" style="width:130px">
                    </a>
-
+                    <br>
                     <label>Titre:</label><p th:text= "${livre.titre}"></p>
-                    <label>Nom de l auteur:</label><p th:text= "${livre.auteurName}"></p>
-                    <label>Prenom de l auteur:</label><p th:text= "${livre.auteurPrenom}"></p>
+                    <label>Nom de l'auteur:</label><p th:text= "${livre.auteurName}"></p>
+                    <label>Prénom de l'auteur:</label><p th:text= "${livre.auteurPrenom}"></p>
                     <label>Edition:</label> <p th:text= "${livre.edition}"></p>
-                    <label>Nombre d exemplaire:</label> <p th:text= "${livre.quantiteDispo}"></p>
+                    <label>Nombre d'exemplaire disponible:</label> <p th:text= "${livre.quantiteDispo}"></p>
                 </div>
+                <a class="btn btn-primary" style="width:130px" th:if="${#request.userPrincipal != null && livre.reservable}" th:href="@{/livre/{id}/reserver(id=${livre.id})}">Reservation</a>
             </div>
 
 

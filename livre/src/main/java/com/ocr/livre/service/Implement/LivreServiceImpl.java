@@ -3,8 +3,10 @@ package com.ocr.livre.service.Implement;
 import com.ocr.livre.LivreApplication;
 import com.ocr.livre.dao.EmpruntLivreDao;
 import com.ocr.livre.dao.LivreDao;
+import com.ocr.livre.dao.ReservationDao;
 import com.ocr.livre.model.Emprunt;
 import com.ocr.livre.model.Livre;
+import com.ocr.livre.model.Reservation;
 import com.ocr.livre.service.LivreService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,6 +26,8 @@ import java.util.List;
         LivreDao livreDao;
         @Autowired
         EmpruntLivreDao empruntLivreDao;
+        @Autowired
+        ReservationDao reservationDao;
 
         /**
          * trouver tous les livres
@@ -63,14 +67,52 @@ import java.util.List;
 
             Livre livre= livreDao.findById(idLivre).get();
 
-            List<Livre> livres= livreDao.findAllByTitre(livre.getTitre());
 
+            List<Livre> livres= livreDao.findAllByTitre(livre.getTitre());
 
             List<Emprunt> emprunts= empruntLivreDao.listeDEmpruntActifParLivre(livre.getTitre());
 
             livre.setQuantiteDispo(livres.size() - emprunts.size());
 
+            livreDao.save(livre);
+
+
             return livre;
+        }
+
+        @Override
+        public Livre recupererUnLivreParUtilisateur(Long id, String pseudo) {
+
+            Livre livre= findLivreById(id);
+
+            List<Livre> livres= livreDao.findAllByTitre(livre.getTitre());
+
+            List<Reservation> reservationsDeUtilisateur= reservationDao.findAllByPseudoEmprunteurAndLivre_TitreAndEnCoursIsTrue(pseudo, livre.getTitre());
+
+            List<Emprunt> empruntsDeUtilisateur= empruntLivreDao.findAllByPseudoEmprunteurAndLivre_TitreAndCloturerIsFalse(pseudo, livre.getTitre());
+
+            List<Reservation> reservationsDunLivre= reservationDao.findAllByLivre_TitreAndAndEnCoursIsTrue(livre.getTitre());
+
+            if( livre.getQuantiteDispo()==0 && reservationsDeUtilisateur.size()==0
+                    && empruntsDeUtilisateur.size()==0 && reservationsDunLivre.size()< livres.size()*2){
+
+                livre.setReservable(true);
+
+            } else{
+                livre.setReservable(false);
+            }
+
+            return livre;
+        }
+
+        @Override
+        public List<Livre> findAllByIdAndDisponibleIsTrue(Long id) {
+            return livreDao.findAllByIdAndDisponibleIsTrue(id);
+        }
+
+        @Override
+        public List<Livre> findAllByIdAndDisponibleIsFalse(Long id) {
+            return livreDao.findAllByIdAndDisponibleIsFalse(id);
         }
 
         /**
@@ -106,6 +148,7 @@ import java.util.List;
 
             livreDao.deleteById(idLivre);
         }
+
 
 
     }

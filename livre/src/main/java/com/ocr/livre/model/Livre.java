@@ -28,9 +28,11 @@ public class Livre {
      * Prenom de l auteur du livre
      */
     private String auteurPrenom ;
+
     /**
      * titre du livre
      */
+    @Column(name="titre_livre")
     private String titre ;
     /**
      * edition du livre
@@ -45,6 +47,10 @@ public class Livre {
      */
     private int quantiteDispo ;
 
+    private boolean reservable;
+
+    private boolean disponible;
+
 
 
 
@@ -52,6 +58,9 @@ public class Livre {
     @JsonIgnore
     @OneToMany(mappedBy = "livre", fetch = FetchType.EAGER)
     private Set<Emprunt> emprunt;
+    @JsonIgnore
+    @OneToMany(mappedBy = "livre", fetch = FetchType.EAGER )
+    private Set<Reservation> reservations;
 
 
     public Livre() {
@@ -72,6 +81,8 @@ public class Livre {
         this.titre = titre;
         this.edition = edition;
         this.image = image;
+        this.reservable= true;
+        this.disponible= true;
 
 
     }
@@ -143,7 +154,23 @@ public class Livre {
         this.quantiteDispo = quantiteDispo;
     }
 
-     @Override
+    public boolean isReservable() {
+        return reservable;
+    }
+
+    public void setReservable(boolean reservable) {
+        this.reservable = reservable;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
+    @Override
     public String toString() {
         return "Livre{" +
                 "id=" + id +
@@ -152,11 +179,20 @@ public class Livre {
                 ", titre='" + titre + '\'' +
                 ", edition='" + edition + '\'' +
                 ", image='" + image + '\'' +
-                ", quantiteDispo='" + quantiteDispo + '\''+
-                ", emprunt='" + emprunt + '\''+
+                ", quantiteDispo=" + quantiteDispo +
+                ", reservable=" + reservable +
+                ", disponible=" + disponible +
+                ", emprunt=" + emprunt +
+                ", reservations=" + reservations +
                 '}';
     }
 
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
 
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
+    }
 }
 

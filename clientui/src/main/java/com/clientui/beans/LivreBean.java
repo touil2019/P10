@@ -45,30 +45,16 @@ public class LivreBean {
     private Set<EmpruntBean> emprunt;
 
 
+    private Set<ReservationBean> reservationBean;
+
+    private boolean reservable;
+
+
+
     public LivreBean() {
     }
 
-    /**
-     *Instanciation du livre
-     * @param auteurName
-     * @param auteurPrenom
-     * @param titre
-     * @param edition
-     * @param image
-     * @param quantiteDispo
-     * @param emprunt
-     */
-    public LivreBean(String auteurName, String auteurPrenom, String titre, String edition, String image, int quantiteDispo, EmpruntBean emprunt) {
 
-        this.auteurName = auteurName;
-        this.auteurPrenom = auteurPrenom;
-        this.titre = titre;
-        this.edition = edition;
-        this.quantiteDispo = quantiteDispo;
-        this.image = image;
-        this.emprunt = (Set<EmpruntBean>) emprunt;
-
-    }
 
     public long getId() {
         return id;
@@ -132,18 +118,26 @@ public class LivreBean {
         this.quantiteDispo = quantiteDispo;
     }
 
-    public boolean isPresent() {
-        return Present;
-    }
-
-    public Set<EmpruntBean> getEmprunt() {
-        return emprunt;
-    }
 
     public void setEmprunt(Set<EmpruntBean> emprunt) {
         this.emprunt = emprunt;
     }
 
+    public Set<ReservationBean> getReservationBean() {
+        return reservationBean;
+    }
+
+    public void setReservationBean(Set<ReservationBean> reservationBean) {
+        this.reservationBean = reservationBean;
+    }
+
+    public boolean isReservable() {
+        return reservable;
+    }
+
+    public void setReservable(boolean reservable) {
+        this.reservable = reservable;
+    }
 
     @Override
     public String toString() {
@@ -157,7 +151,9 @@ public class LivreBean {
                 ", quantiteDispo=" + quantiteDispo +
                 ", Present=" + Present +
                 ", emprunt=" + emprunt +
+                ", reservationBean=" + reservationBean +
                 '}';
+
     }
 }
 

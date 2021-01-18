@@ -44,7 +44,11 @@ public interface EmpruntLivreDao extends JpaRepository<Emprunt, Long> {
      * @param titre
      * @return
      */
-    @Query(value = "select e from Emprunt e inner join fetch e.livre l where l.titre=:titre and e.cloturer=false",
-            countQuery="select count (e) from Emprunt e inner join e.livre l where l.titre=:titre and e.cloturer=false")
+    @Query(value = "select e from Emprunt e inner join fetch e.livre l where l.titre=:titre and e.cloturer=false order by date_fin asc",
+            countQuery="select count (e) from Emprunt e inner join e.livre l where l.titre=:titre and e.cloturer=false  order by date_fin asc")
     List<Emprunt> listeDEmpruntActifParLivre(String titre);
+
+    List<Emprunt> findAllByPseudoEmprunteurAndLivre_TitreAndCloturerIsFalse(String pseudoEmprunteur,String titre);
+
+
 }

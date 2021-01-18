@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ import java.util.Optional;
 @RestController
 public class EmpruntController {
 
-    private static final Logger logger = LogManager.getLogger(LivreApplication.class);
+    private static final Logger logger = LogManager.getLogger(EmpruntController.class);
 
     @Autowired
     EmpruntService empruntService ;
@@ -64,27 +65,27 @@ public class EmpruntController {
 
     /**
      * controleur pour l emprunt d un livre
-     * @param idLivre
+     * @param titre
      * @param pseudoEmprunteur
      * @return
      */
-    @PostMapping(value = "/emprunt/{id}")
-    public Emprunt ouvrirEmprunt(@PathVariable("id") Long idLivre, @RequestParam String pseudoEmprunteur){
+   @PostMapping(value = "/emprunt/{titre}/utilisateur/{pseudoEmprunteur}")
+    public ResponseEntity ouvrirEmpruntTest(@PathVariable("titre") String titre, @RequestParam String pseudoEmprunteur){
 
         logger.debug("Appel controlleur ouvrirEmprunt");
 
-        return empruntService.ouvrirEmprunt(idLivre, pseudoEmprunteur);
+        return empruntService.ouvrirEmpruntTest(titre, pseudoEmprunteur);
     }
 
     /**
      * cloture d un emprunt
-     * @param idEmprunt
+     * @param
      * @return
      */
-    @PutMapping(value = "emprunt/{id}/cloturer")
-    public Emprunt cloturerEmprunt(@PathVariable("id") Long idEmprunt){
+  @PutMapping(value = "emprunt/{id}/cloturer")
+    public ResponseEntity testcloturerEmprunt(@PathVariable("id") Long idEmprunt) throws MessagingException {
         logger.debug("Appel controlleur cloturerEmprunt");
-        return empruntService.cloturerEmprunt(idEmprunt);
+        return empruntService.cloturerEmpruntTest(idEmprunt);
     }
 
     /**
@@ -97,5 +98,7 @@ public class EmpruntController {
 
         return empruntService.listeLivreNonRendueApresDateFin();
     }
+
+
 }
 

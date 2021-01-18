@@ -14,12 +14,12 @@ import javax.mail.MessagingException;
 @Component
 public class BatchJob {
 
-    private static final Logger logger = (Logger) LogManager.getLogger(BatchJob.class);
+    private static final Logger logger = LogManager.getLogger(BatchJob.class);
 
     @Autowired
     EmailService emailService;
 
-    @Scheduled(cron = "0 0 4 * * *")
+    @Scheduled(cron = "0 */60 * * * *")
     public void lendingRevival() throws MessagingException {
       logger.info("Execution du batch");
 
