@@ -1,4 +1,4 @@
-package com.ocr.livre.service.Implement;
+package com.ocr.livre.service.ImplementTest;
 
 import com.ocr.livre.LivreApplication;
 import com.ocr.livre.beans.UtilisateurBean;
@@ -7,8 +7,6 @@ import com.ocr.livre.dao.LivreDao;
 import com.ocr.livre.dao.ReservationDao;
 import com.ocr.livre.model.Email;
 import com.ocr.livre.model.Emprunt;
-import com.ocr.livre.model.Livre;
-import com.ocr.livre.model.Reservation;
 import com.ocr.livre.proxies.MicroserviceUtilisateurProxy;
 import com.ocr.livre.service.EmailService;
 import com.ocr.livre.service.EmpruntService;
@@ -22,7 +20,6 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
