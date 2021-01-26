@@ -81,6 +81,11 @@ import java.util.List;
         }
 
         @Override
+        public Livre save(Livre livre) {
+            return livreDao.save(livre);
+        }
+
+        @Override
         public Livre recupererUnLivreParUtilisateur(Long id, String pseudo) {
 
             Livre livre= findLivreById(id);
@@ -126,7 +131,7 @@ import java.util.List;
             logger.info("Appel LivreServiceImpl méthode enregistrerNouveauLivre");
 
             Livre nouveauLivre = new Livre() ;
-
+            nouveauLivre.setId(livre.getId());
             nouveauLivre.setAuteurName(livre.getAuteurName());
             nouveauLivre.setAuteurPrenom(livre.getAuteurPrenom());
             nouveauLivre.setEdition(livre.getEdition());

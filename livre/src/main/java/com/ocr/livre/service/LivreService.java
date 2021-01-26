@@ -16,6 +16,8 @@ public interface LivreService {
 
     Livre findLivreById(Long idLidvre);
 
+    Livre save(Livre livre);
+
 
     Livre recupererUnLivreParUtilisateur(Long id, String pseudo);
 
