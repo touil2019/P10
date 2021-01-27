@@ -1,12 +1,10 @@
 package com.ocr.livre.web.controller;
 
-import com.ocr.livre.LivreApplication;
 import com.ocr.livre.model.Emprunt;
 import com.ocr.livre.service.EmpruntService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -70,11 +68,11 @@ public class EmpruntController {
      * @return
      */
    @PostMapping(value = "/emprunt/{titre}/utilisateur/{pseudoEmprunteur}")
-    public ResponseEntity ouvrirEmpruntTest(@PathVariable("titre") String titre, @RequestParam String pseudoEmprunteur){
+    public ResponseEntity ouvrirEmprunt(@PathVariable("titre") String titre, @RequestParam String pseudoEmprunteur){
 
         logger.debug("Appel controlleur ouvrirEmprunt");
 
-        return empruntService.ouvrirEmpruntTest(titre, pseudoEmprunteur);
+        return empruntService.ouvrirEmprunt(titre, pseudoEmprunteur);
     }
 
     /**
@@ -83,9 +81,9 @@ public class EmpruntController {
      * @return
      */
   @PutMapping(value = "emprunt/{id}/cloturer")
-    public ResponseEntity testcloturerEmprunt(@PathVariable("id") Long idEmprunt) throws MessagingException {
+    public ResponseEntity cloturerEmprunt(@PathVariable("id") Long idEmprunt) throws MessagingException {
         logger.debug("Appel controlleur cloturerEmprunt");
-        return empruntService.cloturerEmpruntTest(idEmprunt);
+        return empruntService.cloturerEmprunt(idEmprunt);
     }
 
     /**

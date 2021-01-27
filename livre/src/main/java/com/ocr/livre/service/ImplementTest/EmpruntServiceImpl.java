@@ -80,15 +80,17 @@ public class EmpruntServiceImpl implements EmpruntService {
         logger.debug("Appel empruntService méthode findAllByPseudoEmprunteur avec paramètre pseudoEmprunteur : " + pseudoEmprunteur);
         List<Emprunt> emprunts = empruntLivreDao.findAllByPseudoEmprunteurAndCloturerIsFalseOrderByDateDebutAsc(pseudoEmprunteur);
 
+        List<Emprunt> empruntsAjour= new ArrayList<>();
         for (Emprunt e : emprunts) {
             if (e.getDateFin().before(new Date()) && e.isProlongeable() == true) {
 
                 e.setProlongeable(false);
             }
             empruntLivreDao.save(e);
+            empruntsAjour.add(e);
         }
 
-        return empruntLivreDao.findAllByPseudoEmprunteurAndCloturerIsFalseOrderByDateDebutAsc(pseudoEmprunteur);
+        return empruntsAjour;
     }
 
     /**
@@ -122,7 +124,7 @@ public class EmpruntServiceImpl implements EmpruntService {
         Emprunt emprunt = empruntLivreDao.findById(idEmprunt).get();
 
 
-        if (emprunt.isProlongeable() == true && emprunt.isCloturer() == false) {
+        if (emprunt.isProlongeable() == true && emprunt.isCloturer() == false && emprunt.getDateFin().after(new Date())) {
             emprunt.setDateFin(ajouter4Semaines(emprunt.getDateFin()));
             emprunt.setProlongeable(false);
             empruntLivreDao.save(emprunt);
@@ -163,7 +165,7 @@ public class EmpruntServiceImpl implements EmpruntService {
      */
 
   @Override
-    public ResponseEntity ouvrirEmpruntTest(String titre, String pseudoEmprunteur) {
+    public ResponseEntity ouvrirEmprunt(String titre, String pseudoEmprunteur) {
 
         logger.debug("Appel empruntService méthode ouvrirEmprunt");
 
@@ -206,7 +208,7 @@ public class EmpruntServiceImpl implements EmpruntService {
      */
     @Transactional
     @Override
-    public ResponseEntity cloturerEmpruntTest(Long idEmprunt) throws MessagingException {
+    public ResponseEntity cloturerEmprunt(Long idEmprunt) throws MessagingException {
 
         logger.debug("Appel empruntService méthode cloturerEmprunt");
 
