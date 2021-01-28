@@ -17,6 +17,8 @@ import com.ocr.livre.service.ReservationService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
@@ -64,9 +66,10 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<Reservation> findReservationByPseudoEmprunteur(String pseudoEmprunteur) {
 
-        List<Reservation> reservations= new ArrayList<>();
+        List<Reservation> reservations=reservationDao.findAllByPseudoEmprunteurAndEnCoursIsTrue( pseudoEmprunteur);
 
-        reservations =  reservationDao.findAllByPseudoEmprunteurAndEnCoursIsTrue( pseudoEmprunteur);
+
+        List<Reservation> reservationList=  new ArrayList<>();
 
         for (Reservation r :reservations ) {
 
@@ -78,12 +81,12 @@ public class ReservationServiceImpl implements ReservationService {
                 if( r==rl ){
                     r.setPosition(i+1);
                     reservationDao.save(r);
+                    reservationList.add(r);
                 }
             }
         }
 
-
-        return  reservationDao.findAllByPseudoEmprunteurAndEnCoursIsTrue( pseudoEmprunteur);
+        return  reservationList;
     }
 
     @Override
@@ -105,7 +108,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public void creerUneReservation(Long id, String pseudoEmprunteur) {
+    public ResponseEntity creerUneReservation(Long id, String pseudoEmprunteur) {
 
       Optional<Livre> l= livreDao.findById(id);
       Livre livre= null;
@@ -121,14 +124,20 @@ public class ReservationServiceImpl implements ReservationService {
 
           reservationDao.save(reservation);
 
+          return new ResponseEntity(
+                  "reservation réalisée",
+                  HttpStatus.OK);
+
+      }else {
+          return new ResponseEntity(
+                  "livre introuvable",
+                  HttpStatus.BAD_REQUEST);
       }
-
-
     }
 
 
     @Override
-    public void annulerReservation(Long id, String pseudoEmprunteur){
+    public ResponseEntity annulerReservation(Long id, String pseudoEmprunteur){
 
         Optional<Reservation> r=reservationDao.findById(id);
         Reservation reservation = null;
@@ -137,7 +146,19 @@ public class ReservationServiceImpl implements ReservationService {
             if ( reservation.getPseudoEmprunteur().equals(pseudoEmprunteur)){
                 reservation.setEnCours(false);
                 reservationDao.save(reservation);
+
+                return new ResponseEntity(
+                        "reservation annulée",
+                        HttpStatus.OK);
+            }else {
+                return new ResponseEntity(
+                        "pseudo ne corresponds pas",
+                        HttpStatus.BAD_REQUEST);
             }
+        }else {
+            return new ResponseEntity(
+                    "reservation introuvable",
+                    HttpStatus.BAD_REQUEST);
         }
    }
 

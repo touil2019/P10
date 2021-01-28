@@ -7,6 +7,7 @@ import com.ocr.livre.service.LivreService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -74,7 +75,7 @@ public class LivreController {
      * @param idLivre
      */
     @GetMapping(value = "/livre/supprimer/{id}")
-    public void supprimerLivre(@PathVariable ("id") Long idLivre){
+    public void supprimerLivre(@PathVariable("id") Long idLivre){
        livreService.supprimerLivre(idLivre);
     }
 
@@ -84,5 +85,10 @@ public class LivreController {
         return livreService.recupererUnLivreParUtilisateur(id,pseudo);
     }
 
+    @RequestMapping(value = "/addLivre",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String ajouterUnLivre(@RequestBody Livre livre){
+        livreService.save(livre);
+        return "Livre ajouté";
+    }
 }
 
