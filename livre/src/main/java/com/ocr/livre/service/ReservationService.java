@@ -1,6 +1,7 @@
 package com.ocr.livre.service;
 
 import com.ocr.livre.model.Reservation;
+import org.springframework.http.ResponseEntity;
 
 import javax.mail.MessagingException;
 import java.util.Date;
@@ -19,9 +20,9 @@ public interface ReservationService {
 
     void deleteById(Long id);
 
-    void annulerReservation(Long id, String pseudoEmprunteur);
+    ResponseEntity annulerReservation(Long id, String pseudoEmprunteur);
 
-    void creerUneReservation (Long id, String pseudoEmprunteur);
+    ResponseEntity creerUneReservation (Long id, String pseudoEmprunteur);
 
     Date ajouter2Jours(Date date);
 

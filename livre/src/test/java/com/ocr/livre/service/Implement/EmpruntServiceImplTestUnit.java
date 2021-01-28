@@ -1,4 +1,4 @@
-package com.ocr.livre.service.ImplementTest;
+package com.ocr.livre.service.Implement;
 
 
 import com.ocr.livre.beans.UtilisateurBean;
@@ -103,12 +103,6 @@ public class EmpruntServiceImplTestUnit {
         Mockito.when(empruntLivreDao.findAllByPseudoEmprunteurAndCloturerIsFalseOrderByDateDebutAsc(utilisateurBean1.getUsername())).thenReturn(empruntList);
         Mockito.when(empruntLivreDao.findById(1L)).thenReturn(Optional.of(emprunt));
         Mockito.when(empruntLivreDao.findById(2L)).thenReturn(Optional.of(emprunt1));
-        Mockito.when(empruntLivreDao.findAllByCloturerIsFalseAndDateFinBefore(new Date())).thenReturn(empruntList);
-        Mockito.when(livreDao.findAllByTitreAndDisponibleIsTrue(livre.getTitre())).thenReturn(livreList.subList(0,1));
-        Mockito.when(livreDao.findAllByTitreAndDisponibleIsFalse(livre1.getTitre())).thenReturn(livreList.subList(1,2));
-        Mockito.when(livreDao.save(livre1)).thenReturn(livre1);
-        Mockito.when(livreDao.save(livre)).thenReturn(livre);
-        Mockito.when(reservationDao.findAllByLivre_TitreAndEnCoursIsTrueAndNotifiedIsFalseOrderByDateReservationAsc(livre.getTitre())).thenReturn(reservationList);
 
 
     }
