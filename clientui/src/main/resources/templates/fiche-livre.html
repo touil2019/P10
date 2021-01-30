@@ -48,6 +48,14 @@
                     <label>Prénom de l'auteur:</label><p th:text= "${livre.auteurPrenom}"></p>
                     <label>Edition:</label> <p th:text= "${livre.edition}"></p>
                     <label>Nombre d'exemplaire disponible:</label> <p th:text= "${livre.quantiteDispo}"></p>
+                    <label th:if="${livre.quantiteDispo==0}">File d'attente:</label>
+                       <p th:if="${livre.quantiteDispo==0}"
+                       th:text= "${livre.nombreResa}+'/'+${livre.quantite*2}"></p>
+
+                       <label th:if="${livre.quantiteDispo==0}">prochain retour:</label>
+                       <p th:if="${livre.quantiteDispo==0}"
+                          th:text="${#dates.format(livre.prochainRetour, 'dd/MM/yyyy')}"></p>
+
                 </div>
                 <a class="btn btn-primary" style="width:130px" th:if="${#request.userPrincipal != null && livre.reservable}" th:href="@{/livre/{id}/reserver(id=${livre.id})}">Reservation</a>
             </div>

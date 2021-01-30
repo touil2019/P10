@@ -1,5 +1,6 @@
 package com.clientui.beans;
 
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -38,16 +39,23 @@ public class LivreBean {
     /**
      * livre present ou non
      */
-    private boolean Present;
+    private boolean present;
+    /**
+     * quantite de livre
+     */
+    private int quantite;
     /**
      * relation avec la table
      */
     private Set<EmpruntBean> emprunt;
 
+    private Date prochainRetour;
 
-    private Set<ReservationBean> reservationBean;
+    private Set<ReservationBean> reservations;
 
     private boolean reservable;
+
+    private int nombreResa;
 
 
 
@@ -65,7 +73,7 @@ public class LivreBean {
     }
 
     public void setPresent(boolean present) {
-        Present = present;
+        this.present = present;
     }
 
     public String getAuteurName() {
@@ -92,6 +100,13 @@ public class LivreBean {
         this.titre = titre;
     }
 
+    public int getNombreResa() {
+        return nombreResa;
+    }
+
+    public void setNombreResa(int nombreResa) {
+        this.nombreResa = nombreResa;
+    }
 
     public String getEdition() {
         return edition;
@@ -123,12 +138,12 @@ public class LivreBean {
         this.emprunt = emprunt;
     }
 
-    public Set<ReservationBean> getReservationBean() {
-        return reservationBean;
+    public Set<ReservationBean> getReservations() {
+        return reservations;
     }
 
-    public void setReservationBean(Set<ReservationBean> reservationBean) {
-        this.reservationBean = reservationBean;
+    public void setReservations(Set<ReservationBean> reservations) {
+        this.reservations = reservations;
     }
 
     public boolean isReservable() {
@@ -137,6 +152,30 @@ public class LivreBean {
 
     public void setReservable(boolean reservable) {
         this.reservable = reservable;
+    }
+
+    public Date getProchainRetour() {
+        return prochainRetour;
+    }
+
+    public void setProchainRetour(Date prochainRetour) {
+        this.prochainRetour = prochainRetour;
+    }
+
+    public boolean isPresent() {
+        return present;
+    }
+
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
+
+    public Set<EmpruntBean> getEmprunt() {
+        return emprunt;
     }
 
     @Override
@@ -149,9 +188,9 @@ public class LivreBean {
                 ", edition='" + edition + '\'' +
                 ", image='" + image + '\'' +
                 ", quantiteDispo=" + quantiteDispo +
-                ", Present=" + Present +
+                ", Present=" + present +
                 ", emprunt=" + emprunt +
-                ", reservationBean=" + reservationBean +
+                ", reservationBean=" + reservations +
                 '}';
 
     }

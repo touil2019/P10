@@ -70,14 +70,7 @@ public class LivreController {
          return livreService.enregistrerNouveauLivre(livre);
     }
 
-    /**
-     * supprimer un livre
-     * @param idLivre
-     */
-    @GetMapping(value = "/livre/supprimer/{id}")
-    public void supprimerLivre(@PathVariable("id") Long idLivre){
-       livreService.supprimerLivre(idLivre);
-    }
+
 
 
     @GetMapping(value = "/Livre/{id}/utilisateur/{pseudo}")

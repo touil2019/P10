@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
     @EnableScheduling
@@ -70,12 +71,21 @@ import java.util.List;
 
             List<Livre> livres= livreDao.findAllByTitre(livre.getTitre());
 
+            livre.setQuantite(livres.size());
+
             List<Emprunt> emprunts= empruntLivreDao.listeDEmpruntActifParLivre(livre.getTitre());
 
             livre.setQuantiteDispo(livres.size() - emprunts.size());
 
             livreDao.save(livre);
 
+            List<Reservation> reservationsParLivre= reservationDao.findAllByLivre_TitreAndAndEnCoursIsTrue(livre.getTitre());
+
+            livre.setNombreResa(reservationsParLivre.size());
+
+            if(emprunts.size()>0){
+                livre.setProchainRetour(emprunts.get(0).getDateFin());
+            }
 
             return livre;
         }
@@ -141,19 +151,6 @@ import java.util.List;
 
             return livreDao.save(nouveauLivre);
         }
-
-        /**
-         * supprimer un livre par son id
-         * @param idLivre
-         */
-        @Override
-        public void supprimerLivre(Long idLivre) {
-
-            logger.info("Appel LivreServiceImpl méthode supprimerLivre avec paramètre idLidvre : " + idLivre );
-
-            livreDao.deleteById(idLivre);
-        }
-
 
 
     }

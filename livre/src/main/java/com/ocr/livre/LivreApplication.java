@@ -67,11 +67,11 @@ private ReservationDao reservationDao;
 		livre3.setDisponible(false);
 		livre3.setQuantiteDispo(1);
 		livreDao.save(livre3);
-		Livre livre4 = new Livre("LEE","Harper","Ne Tirez Pas Sur L'Oiseau Moqueur","LE LIVRE DE POCHE","https://m.media-amazon.com/images/I/41mY4e0kS9L.jpg");
+
+		Livre livre4= new Livre("LEE","Harper","Ne Tirez Pas Sur L'Oiseau Moqueur","LE LIVRE DE POCHE","https://m.media-amazon.com/images/I/41mY4e0kS9L.jpg");
 		livre4.setDisponible(true);
 		livre4.setQuantiteDispo(1);
 		livreDao.save(livre4);
-
 
 
 		/**Emprunts du livre : Black Boy**/
@@ -83,14 +83,14 @@ private ReservationDao reservationDao;
 
 		/**Emprunts du livre : Les Raisins De La Colere**/
 
-		Emprunt emprunt2 = new Emprunt("admin",new GregorianCalendar(2021, Calendar.JANUARY,8).getTime(),true,false,livre2);
+		Emprunt emprunt2 = new Emprunt("admin",new GregorianCalendar(2021, Calendar.JANUARY,10).getTime(),true,false,livre2);
 		emprunt2.setDateFin(empruntService.ajouter4Semaines(emprunt2.getDateDebut()));
 		empruntLivreDao.save(emprunt2);
 
 
 		/**Emprunts du livre : Ne Tirez Pas Sur L'Oiseau Moqueur**/
 
-		Emprunt emprunt3 = new Emprunt("admin",new GregorianCalendar(2020,Calendar.NOVEMBER,12).getTime(),true,false,livre4);
+		Emprunt emprunt3 = new Emprunt("admin",new GregorianCalendar(2020,Calendar.NOVEMBER,12).getTime(),true,false,livre3);
 		emprunt3.setDateFin(empruntService.ajouter4Semaines(emprunt3.getDateDebut()));
 		empruntLivreDao.save(emprunt3);
 
@@ -123,7 +123,7 @@ private ReservationDao reservationDao;
 
 		/**Reservation du livre: Ne tirez pas sur l'oiseau moqueur**/
 
-		Reservation reservation3 = new Reservation(livre4,"user",new GregorianCalendar(2021,Calendar.JANUARY,8).getTime(), new GregorianCalendar(2021,01,06).getTime());
+		Reservation reservation3 = new Reservation(livre3,"user",new GregorianCalendar(2021,Calendar.JANUARY,8).getTime(), new GregorianCalendar(2021,01,06).getTime());
 		reservationDao.save(reservation3);
 
 		/**Les Raisins De La Colere**/

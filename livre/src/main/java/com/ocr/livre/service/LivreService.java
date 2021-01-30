@@ -12,8 +12,6 @@ public interface LivreService {
 
     Livre enregistrerNouveauLivre(Livre livre);
 
-    void supprimerLivre(Long livre);
-
     Livre findLivreById(Long idLidvre);
 
     Livre save(Livre livre);

@@ -1,5 +1,8 @@
 package com.ocr.livre.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -30,6 +33,7 @@ Reservation implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_livre")
+    @JsonManagedReference
     private Livre livre;
 
     public Reservation() {

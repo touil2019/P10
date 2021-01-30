@@ -1,9 +1,12 @@
 package com.ocr.livre.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -47,9 +50,15 @@ public class Livre {
      */
     private int quantiteDispo ;
 
+    private int quantite;
+
     private boolean reservable;
 
     private boolean disponible;
+
+    private int nombreResa;
+
+    private Date prochainRetour;
 
 
 
@@ -58,7 +67,7 @@ public class Livre {
     @JsonIgnore
     @OneToMany(mappedBy = "livre", fetch = FetchType.EAGER)
     private Set<Emprunt> emprunt;
-    @JsonIgnore
+    @JsonBackReference
     @OneToMany(mappedBy = "livre", fetch = FetchType.EAGER )
     private Set<Reservation> reservations;
 
@@ -168,6 +177,30 @@ public class Livre {
 
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
+    }
+
+    public Date getProchainRetour() {
+        return prochainRetour;
+    }
+
+    public void setProchainRetour(Date prochainRetour) {
+        this.prochainRetour = prochainRetour;
+    }
+
+    public int getNombreResa() {
+        return nombreResa;
+    }
+
+    public void setNombreResa(int nombreResa) {
+        this.nombreResa = nombreResa;
+    }
+
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
     }
 
     @Override
