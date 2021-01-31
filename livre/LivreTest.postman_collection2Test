@@ -17,10 +17,9 @@
 							"    pm.response.to.be.ok;\r",
 							"    pm.response.to.be.json;\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData[0].titre).to.eql(\"Black Boy\");\r",
-							"    pm.expect(jsonData[1].titre).to.eql(\"Les Raisins De La Colere\");\r",
-							"    pm.expect(jsonData[2].titre).to.eql(\"Ne Tirez Pas Sur L'Oiseau Moqueur\");\r",
-							"    pm.expect(jsonData[3].titre).to.eql(\"Ne Tirez Pas Sur L'Oiseau Moqueur\");\r",
+							"    pm.expect(jsonData.length).to.eql(4);\r",
+							"    \r",
+							"   \r",
 							"});\r",
 							"\r",
 							"\r",
@@ -72,8 +71,7 @@
 							"pm.test(\"testEmprunt\", function(){\r",
 							"    pm.response.to.have.status(200);\r",
 							"    pm.response.to.be.ok;\r",
-							"    var jsonData = pm.response.text();\r",
-							"    pm.expect(jsonData).to.eql(\"L'emprunt a été ouvert\");     \r",
+							"     \r",
 							"});\r",
 							"\r",
 							"\r",
@@ -98,7 +96,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:9090/emprunt/Ne Tirez Pas Sur L'Oiseau Moqueur/utilisateur/user",
+					"raw": "http://localhost:9090/emprunt/Ne Tirez Pas Sur L'Oiseau Moqueur/utilisateur/use",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -108,59 +106,7 @@
 						"emprunt",
 						"Ne Tirez Pas Sur L'Oiseau Moqueur",
 						"utilisateur",
-						"user"
-					]
-				},
-				"description": "verifie le status 200 et l'emprunt a été ouvert"
-			},
-			"response": []
-		},
-		{
-			"name": "Teste de clôture d'un emprunt",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"findAllLivres\", function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"    pm.response.to.be.ok;\r",
-							"    var jsonData = pm.response.text();\r",
-							"    pm.expect(jsonData).to.eql(\"emprunt cloturé\");\r",
-							"});\r",
-							"\r",
-							"\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "pseudoEmprunteur",
-							"value": "user",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:9090/emprunt/13/cloturer",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9090",
-					"path": [
-						"emprunt",
-						"13",
-						"cloturer"
+						"use"
 					]
 				}
 			},
@@ -196,12 +142,13 @@
 						{
 							"key": "pseudoEmprunteur",
 							"value": "user",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:9090/emprunt/5/prolonger",
+					"raw": "http://localhost:9090/emprunt/4/prolonger",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -209,8 +156,60 @@
 					"port": "9090",
 					"path": [
 						"emprunt",
-						"5",
+						"4",
 						"prolonger"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Teste de clôture d'un emprunt",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"findAllLivres\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.ok;\r",
+							"    var jsonData = pm.response.text();\r",
+							"    pm.expect(jsonData).to.eql(\"emprunt cloturé\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "pseudoEmprunteur",
+							"value": "user",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:9090/emprunt/4/cloturer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"emprunt",
+						"4",
+						"cloturer"
 					]
 				}
 			},
@@ -263,59 +262,6 @@
 					"path": [
 						"Livre",
 						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "SupprimerLivre",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"testEmprunt\", function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"    pm.response.to.be.ok;\r",
-							"     \r",
-							"});\r",
-							"\r",
-							"\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "pseudoEmprunteur",
-							"value": "user",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:9090/livre/supprimer/3",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9090",
-					"path": [
-						"livre",
-						"supprimer",
-						"3"
 					]
 				}
 			},
@@ -426,68 +372,6 @@
 						{
 							"key": "mc",
 							"value": "boy"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "NouveauLivre",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"testEmprunt\", function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"    pm.response.to.be.ok;\r",
-							"     \r",
-							"});\r",
-							"\r",
-							"\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"id\":5}"
-				},
-				"url": {
-					"raw": "http://localhost:9090/livre/enregistrer",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9090",
-					"path": [
-						"livre",
-						"enregistrer"
-					],
-					"query": [
-						{
-							"key": "id",
-							"value": "5",
-							"disabled": true
-						},
-						{
-							"key": "livre",
-							"value": "",
-							"disabled": true
 						}
 					]
 				}

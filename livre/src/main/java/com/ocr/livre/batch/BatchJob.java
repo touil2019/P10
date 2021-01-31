@@ -19,7 +19,7 @@ public class BatchJob {
     @Autowired
     EmailService emailService;
 
-    @Scheduled(cron = "0 */60 * * * *")
+    @Scheduled(cron = "*/60 * * * * *")
     public void lendingRevival() throws MessagingException {
       logger.info("Execution du batch");
 

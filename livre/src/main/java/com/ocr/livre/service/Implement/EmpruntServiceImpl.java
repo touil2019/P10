@@ -121,14 +121,15 @@ public class EmpruntServiceImpl implements EmpruntService {
 
         logger.debug("Appel empruntService méthode prolongerEmprunt avec paramètre idEmprunt : " + idEmprunt);
 
-        Emprunt emprunt = empruntLivreDao.findById(idEmprunt).get();
+        //Emprunt emprunt = empruntLivreDao.findById(idEmprunt).get();
+        Optional<Emprunt> emprunt= empruntLivreDao.findByLivre_IdAndCloturerIsFalse(idEmprunt);
 
 
-        if (emprunt.isProlongeable() == true && emprunt.isCloturer() == false && emprunt.getDateFin().after(new Date())) {
-            emprunt.setDateFin(ajouter4Semaines(emprunt.getDateFin()));
-            emprunt.setProlongeable(false);
-            empruntLivreDao.save(emprunt);
-            return ResponseEntity.ok(emprunt);
+        if (emprunt.get().isProlongeable() == true && emprunt.get().isCloturer() == false && emprunt.get().getDateFin().after(new Date())) {
+            emprunt.get().setDateFin(ajouter4Semaines(emprunt.get().getDateFin()));
+            emprunt.get().setProlongeable(false);
+            empruntLivreDao.save(emprunt.get());
+            return ResponseEntity.ok(emprunt.get());
 
         } else {
             return new ResponseEntity(
@@ -154,6 +155,10 @@ public class EmpruntServiceImpl implements EmpruntService {
         return listeEmprunt;
     }
 
+    @Override
+    public Optional<Emprunt> findByLivre_IdAndCloturerIsFalse(Long id) {
+        return empruntLivreDao.findByLivre_IdAndCloturerIsFalse(id);
+    }
 
 
     /**
@@ -208,13 +213,13 @@ public class EmpruntServiceImpl implements EmpruntService {
      */
     @Transactional
     @Override
-    public ResponseEntity cloturerEmprunt(Long idEmprunt) throws MessagingException {
+    public ResponseEntity cloturerEmprunt(Long idLivre) throws MessagingException {
 
         logger.debug("Appel empruntService méthode cloturerEmprunt");
 
         Email email = emailDao.findAllByNom("notification");
-        Emprunt emprunt = empruntLivreDao.findById(idEmprunt).get();
-        Livre livre = livreDao.findById(emprunt.getLivre().getId()).get();
+        Optional<Emprunt> emprunt = empruntLivreDao.findByLivre_IdAndCloturerIsFalse(idLivre);
+        Optional<Livre> livre = livreDao.findById(emprunt.get().getLivre().getId());
         DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
                 DateFormat.SHORT,
                 DateFormat.SHORT
@@ -222,21 +227,21 @@ public class EmpruntServiceImpl implements EmpruntService {
         String dateDuJour = shortDateFormat.format(new Date());
         if (emprunt != null) {
 
-            if (!emprunt.isCloturer()) {
-                List<Livre> livresIndisponible= livreDao.findAllByTitreAndDisponibleIsFalse(livre.getTitre());
+            if (!emprunt.get().isCloturer()) {
+                List<Livre> livresIndisponible= livreDao.findAllByTitreAndDisponibleIsFalse(livre.get().getTitre());
 
-                livre.setDisponible(true);
-                livre.setQuantiteDispo(livre.getQuantiteDispo()+1);
-                livreDao.save(livre);
-                emprunt.setCloturer(true);
-                empruntLivreDao.save(emprunt);
-                livresIndisponible= livreDao.findAllByTitreAndDisponibleIsFalse(livre.getTitre());
+                livre.get().setDisponible(true);
+                livre.get().setQuantiteDispo(livre.get().getQuantiteDispo()+1);
+                livreDao.save(livre.get());
+                emprunt.get().setCloturer(true);
+                empruntLivreDao.save(emprunt.get());
+                livresIndisponible= livreDao.findAllByTitreAndDisponibleIsFalse(livre.get().getTitre());
                 for (Livre l: livresIndisponible ) {
                     l.setQuantiteDispo(l.getQuantiteDispo()+1);
                     livreDao.save(l);
                 }
 
-                List<Reservation> fileAttente = reservationDao.findAllByLivre_TitreAndEnCoursIsTrueAndNotifiedIsFalseOrderByDateReservationAsc(livre.getTitre());
+                List<Reservation> fileAttente = reservationDao.findAllByLivre_TitreAndEnCoursIsTrueAndNotifiedIsFalseOrderByDateReservationAsc(livre.get().getTitre());
 
                 if (!fileAttente.isEmpty()) {
                     Reservation reservation = fileAttente.get(0);

@@ -27,5 +27,7 @@ public interface EmpruntService {
 
     List<Emprunt> listeLivreNonRendueApresDateFin();
 
+    Optional<Emprunt> findByLivre_IdAndCloturerIsFalse(Long id);
+
 
 }
